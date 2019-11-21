@@ -30,9 +30,10 @@ class GamePlayTest: XCTestCase {
     func testGameNextMove() {
        let gamePlay = GamePlay()
        gamePlay.start()
-       let tictacarray = gamePlay.play(position: 5, symbol: GamePlay.Symbol.X)
-        
-       XCTAssertEqual([["", "", ""], ["", "X", ""], ["", "", ""]], tictacarray)
+       var tictacarray = gamePlay.play(position: 5, symbol: GamePlay.Symbol.X)
+       tictacarray = gamePlay.play(position: 1, symbol: GamePlay.Symbol.O)
+       tictacarray = gamePlay.play(position: 2, symbol: GamePlay.Symbol.X)
+       XCTAssertEqual([["O", "X", ""], ["", "X", ""], ["", "", ""]], tictacarray)
     }
 
     func testPerformanceExample() {
