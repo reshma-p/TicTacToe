@@ -19,36 +19,27 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        createGrid()
+        createGrid()
     }
     
     func createGrid(){
         
         let label = UILabel()
         let margins = gridView.layoutMarginsGuide
+
         
-        for index in 1...6{
-            print("\(index)")
-            label.text = "\(index)"
-            label.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
-            label.textColor = UIColor.red
-            
-            
-            
-            labels.append(label)
-            gridView.addSubview(label)
+        var count = 1
+        for row in 0...2{
+            for col in 0...2{
+               print("\(count) == \(row*80) \(col*80)")
+               label.text = "\(count)"
+               label.frame = CGRect(x: row*80, y: col*80, width: 80, height: 80)
+               label.textColor = UIColor.red
+               labels.append(label)
+               gridView.addSubview(label)
+                count = count + 1
+            }
         }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
