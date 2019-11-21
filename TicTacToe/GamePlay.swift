@@ -10,7 +10,10 @@ import Foundation
 
 class GamePlay{
     
-    
+    enum Symbol{
+        case X
+        case O
+    }
     var currentGameMatrix : [[String]]?
     func start() -> [[String]]{
         self.currentGameMatrix = Array.init(repeating: Array.init(repeating: "", count: 3),count: 3);
@@ -18,8 +21,8 @@ class GamePlay{
     }
     
     
-    func nextMove(){
-        
+    func play(position: Int, symbol: Symbol) ->  [[String]]{
+        return [[String]]()
     }
     
     func reset(){

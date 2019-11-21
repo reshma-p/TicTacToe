@@ -9,9 +9,12 @@
 import XCTest
 
 class GamePlayTest: XCTestCase {
+   
+    
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        
     }
 
     override func tearDown() {
@@ -19,15 +22,17 @@ class GamePlayTest: XCTestCase {
     }
 
     func testGameStart() {
-        let tictacarray = GamePlay().start()
+        let gamePlay = GamePlay()
+        let tictacarray = gamePlay.start()
         XCTAssertEqual([["", "", ""], ["", "", ""], ["", "", ""]], tictacarray)
     }
     
     func testGameNextMove() {
-        let tictacarray = GamePlay().start()
+       let gamePlay = GamePlay()
+       gamePlay.start()
+       let tictacarray = gamePlay.play(position: 5, symbol: GamePlay.Symbol.X)
         
-        
-        XCTAssertEqual([["", "", ""], ["", "", ""], ["", "", ""]], tictacarray)
+       XCTAssertEqual([["", "", ""], ["", "X", ""], ["", "", ""]], tictacarray)
     }
 
     func testPerformanceExample() {
