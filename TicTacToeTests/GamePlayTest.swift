@@ -23,17 +23,24 @@ class GamePlayTest: XCTestCase {
 
     func testGameStart() {
         let gamePlay = GamePlay()
-        let tictacarray = gamePlay.start()
+        let tictacarray = gamePlay.start(rows: 3,columns: 3)
         XCTAssertEqual([["", "", ""], ["", "", ""], ["", "", ""]], tictacarray)
     }
     
-    func testGameNextMove() {
-       let gamePlay = GamePlay()
-       gamePlay.start()
-       var tictacarray = gamePlay.play(position: 5, symbol: GamePlay.Symbol.X)
-       tictacarray = gamePlay.play(position: 1, symbol: GamePlay.Symbol.O)
-       tictacarray = gamePlay.play(position: 2, symbol: GamePlay.Symbol.X)
-       XCTAssertEqual([["O", "X", ""], ["", "X", ""], ["", "", ""]], tictacarray)
+    func testPositionAdditionInPlay() {
+        let gamePlay = GamePlay()
+        var tictacarray = gamePlay.start(rows: 3,columns: 4)
+        
+        tictacarray = gamePlay.play(position: (row:0,column: 0), symbol: GamePlay.Symbol.X1)
+        tictacarray = gamePlay.play(position: (row:0,column: 1), symbol: GamePlay.Symbol.X2)
+        tictacarray = gamePlay.play(position: (row:0,column: 2), symbol: GamePlay.Symbol.X3)
+        tictacarray = gamePlay.play(position: (row:0,column: 3), symbol: GamePlay.Symbol.X4)
+        tictacarray = gamePlay.play(position: (row:1,column: 0), symbol: GamePlay.Symbol.X5)
+        tictacarray = gamePlay.play(position: (row:1,column: 1), symbol: GamePlay.Symbol.X6)
+        tictacarray = gamePlay.play(position: (row:1,column: 2), symbol: GamePlay.Symbol.X7)
+        tictacarray = gamePlay.play(position: (row:1,column: 3), symbol: GamePlay.Symbol.X8)
+        tictacarray = gamePlay.play(position: (row:2,column: 0), symbol: GamePlay.Symbol.X9)
+        XCTAssertEqual([["X1", "X2", "X3","X4"], ["X5", "X6", "X7","X8"], ["X9", "", "",""]], tictacarray)
     }
 
     func testPerformanceExample() {
@@ -42,5 +49,7 @@ class GamePlayTest: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+    
+    
 
 }

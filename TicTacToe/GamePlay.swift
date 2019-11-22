@@ -11,30 +11,36 @@ import Foundation
 class GamePlay{
     
     enum Symbol:String{
-        case X
-        case O
+        case X1
+        
+        case X2
+        case X3
+        case X4
+        case X5
+        case X6
+        case X7
+        case X8
+        case X9
     }
     var currentGameMatrix : [[String]]?
-    let rows = 3
-    let columns = 3
-    func start() -> [[String]]{
-        self.currentGameMatrix = Array.init(repeating: Array.init(repeating: "", count: rows),count: columns);
+    var rows = 1
+    var columns = 1
+    func start(rows: Int,columns: Int) -> [[String]]{
+        self.rows = rows
+        self.columns = columns
+        self.currentGameMatrix = Array.init(repeating: Array.init(repeating: "", count: columns),count: rows);
         return self.currentGameMatrix!;
     }
     
     
-    func play(position: Int, symbol: Symbol) ->  [[String]]{
-        
-        let rowposition = position/rows
-        let colposition = (position % rows - 1)
-        
-        if(rowposition >= 0 && colposition >= 0){
-            currentGameMatrix?[rowposition][colposition] = symbol.rawValue
-        }
+    func play(position: (row: Int, column: Int), symbol: Symbol) ->  [[String]]{
+        currentGameMatrix?[position.row][position.column] = symbol.rawValue
         return currentGameMatrix ?? [[String]]()
     }
     
     func reset(){
         
     }
+    
+    
 }
