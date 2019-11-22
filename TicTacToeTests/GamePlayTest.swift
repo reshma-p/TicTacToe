@@ -23,25 +23,33 @@ class GamePlayTest: XCTestCase {
 
     func testGameStart() {
         let gamePlay = GamePlay()
-        let tictacarray = gamePlay.start(rows: 3,columns: 3)
-        XCTAssertEqual([["", "", ""], ["", "", ""], ["", "", ""]], tictacarray)
+        let tictacarray = gamePlay.start()
+        XCTAssertEqual(["","","","","","","","",""], tictacarray)
     }
     
     func testPositionAdditionInPlay() {
         let gamePlay = GamePlay()
-        var tictacarray = gamePlay.start(rows: 3,columns: 4)
+        var tictacarray = gamePlay.start()
         
-        tictacarray = gamePlay.play(position: (row:0,column: 0), symbol: GamePlay.Symbol.X1)
-        tictacarray = gamePlay.play(position: (row:0,column: 1), symbol: GamePlay.Symbol.X2)
-        tictacarray = gamePlay.play(position: (row:0,column: 2), symbol: GamePlay.Symbol.X3)
-        tictacarray = gamePlay.play(position: (row:0,column: 3), symbol: GamePlay.Symbol.X4)
-        tictacarray = gamePlay.play(position: (row:1,column: 0), symbol: GamePlay.Symbol.X5)
-        tictacarray = gamePlay.play(position: (row:1,column: 1), symbol: GamePlay.Symbol.X6)
-        tictacarray = gamePlay.play(position: (row:1,column: 2), symbol: GamePlay.Symbol.X7)
-        tictacarray = gamePlay.play(position: (row:1,column: 3), symbol: GamePlay.Symbol.X8)
-        tictacarray = gamePlay.play(position: (row:2,column: 0), symbol: GamePlay.Symbol.X9)
-        XCTAssertEqual([["X1", "X2", "X3","X4"], ["X5", "X6", "X7","X8"], ["X9", "", "",""]], tictacarray)
+        tictacarray = gamePlay.play(position: 1, symbol: GamePlay.Symbol.X)
+        XCTAssertEqual(["","X","","","","","","",""], tictacarray)
+        tictacarray = gamePlay.play(position: 100, symbol: GamePlay.Symbol.O)
+        XCTAssertEqual([], tictacarray)
     }
+    
+    func testPlayedMoveWin(){
+        let gamePlay = GamePlay()
+        var tictacarray = gamePlay.start()
+        tictacarray = gamePlay.play(position: 0, symbol: GamePlay.Symbol.X)
+        tictacarray = gamePlay.play(position: 1, symbol: GamePlay.Symbol.X)
+        tictacarray = gamePlay.play(position: 2, symbol: GamePlay.Symbol.X)
+        tictacarray = gamePlay.play(position: 4, symbol: GamePlay.Symbol.O)
+        XCTAssertEqual(["X","X","X","","O","","","",""], tictacarray)
+        XCTAssertTrue(gamePlay.checkMoveWin(gameArray: tictacarray))
+    }
+    
+    
+    
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
