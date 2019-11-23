@@ -36,10 +36,22 @@ class GamePlay{
         return currentGameMatrix
     }
     
-    func checkMoveWin(gameArray : [String]) -> Bool{
+    func checkMoveWin(gameArray : [String], for position: Int) -> Bool{
         // matched in rows
         
-        return false
+        let rowPosition : Int = position/rows  // 3/ 3 = 1
+        let colRange = rowPosition...((columns - 1) * (rowPosition + 1)) // 0 ... ( 3 - 1 * 1)
+        print("==== > colRange - \(colRange)")
+        let symbol = gameArray[position]
+        print("==== > symbol - \(symbol)")
+        //-- Check row wins
+        for index in colRange{
+            if(symbol != gameArray[index]){
+                print("Found mismatch - \(index)")
+                return false
+            }
+        }
+        return true
     }
     
     func reset(){

@@ -37,7 +37,7 @@ class GamePlayTest: XCTestCase {
         XCTAssertEqual([], tictacarray)
     }
     
-    func testPlayedMoveWin(){
+    func testPlayedMoveWinTopRow(){
         let gamePlay = GamePlay()
         var tictacarray = gamePlay.start()
         tictacarray = gamePlay.play(position: 0, symbol: GamePlay.Symbol.X)
@@ -45,19 +45,8 @@ class GamePlayTest: XCTestCase {
         tictacarray = gamePlay.play(position: 2, symbol: GamePlay.Symbol.X)
         tictacarray = gamePlay.play(position: 4, symbol: GamePlay.Symbol.O)
         XCTAssertEqual(["X","X","X","","O","","","",""], tictacarray)
-        XCTAssertTrue(gamePlay.checkMoveWin(gameArray: tictacarray))
+        XCTAssertTrue(gamePlay.checkMoveWin(gameArray: tictacarray, for: 0))
+        XCTAssertTrue(gamePlay.checkMoveWin(gameArray: tictacarray, for: 1))
+        XCTAssertTrue(gamePlay.checkMoveWin(gameArray: tictacarray, for: 2))
     }
-    
-    
-    
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
-    
-
 }
