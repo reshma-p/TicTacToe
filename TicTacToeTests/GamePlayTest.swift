@@ -49,4 +49,19 @@ class GamePlayTest: XCTestCase {
         XCTAssertTrue(gamePlay.checkMoveWin(gameArray: tictacarray, for: 1))
         XCTAssertTrue(gamePlay.checkMoveWin(gameArray: tictacarray, for: 2))
     }
+    
+    func testPlayedMoveWinMiddleRow(){
+        let gamePlay = GamePlay()
+        var tictacarray = gamePlay.start()
+        tictacarray = gamePlay.play(position: 0, symbol: GamePlay.Symbol.O)
+        tictacarray = gamePlay.play(position: 3, symbol: GamePlay.Symbol.X)
+        tictacarray = gamePlay.play(position: 5, symbol: GamePlay.Symbol.X)
+        tictacarray = gamePlay.play(position: 4, symbol: GamePlay.Symbol.X)
+        
+        
+        XCTAssertEqual(["O","","","X","X","X","","",""], tictacarray)
+        XCTAssertTrue(gamePlay.checkMoveWin(gameArray: tictacarray, for: 3))
+        XCTAssertTrue(gamePlay.checkMoveWin(gameArray: tictacarray, for: 4))
+        XCTAssertTrue(gamePlay.checkMoveWin(gameArray: tictacarray, for: 5))
+    }
 }
