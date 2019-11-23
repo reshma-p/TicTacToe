@@ -39,19 +39,19 @@ class GamePlay{
     func checkMoveWin(gameArray : [String], for position: Int) -> Bool{
         // matched in rows
         
-        let rowPosition : Int = position/rows  // 3/ 3 = 1
-        print("==== > colRange - \(position)/\(rows) => \(rowPosition)")
-        let colRange = (columns * rowPosition)...((columns * (rowPosition + 1)) - 1) // 0 ... ( 3 - 1 * 1)
-        print("==== > colRange - \(colRange)")
+        let rowPosition : Int = position/rows
+        let colRange = (columns * rowPosition)...((columns * (rowPosition + 1)) - 1)
         let symbol = gameArray[position]
-        print("==== > symbol - \(symbol)")
+        
         //-- Check row wins
         for index in colRange{
             if(symbol != gameArray[index]){
-                print("Found mismatch - \(index)")
                 return false
             }
         }
+        
+        //-- Check column wins
+        
         return true
     }
     
