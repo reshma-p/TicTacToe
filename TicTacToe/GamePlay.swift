@@ -37,7 +37,14 @@ class GamePlay{
     }
     
     func checkMoveWin(gameArray : [String], for position: Int) -> Bool{
-        // matched in rows
+
+        if(isRowWin(gameArray: gameArray, for: position) || isColumnWin(gameArray: gameArray, for: position)){
+            return true
+        }
+        return false
+    }
+    
+    fileprivate func isRowWin(gameArray : [String], for position: Int) -> Bool{
         
         let rowPosition : Int = position/rows
         let colRange = (columns * rowPosition)...((columns * (rowPosition + 1)) - 1)
@@ -49,11 +56,26 @@ class GamePlay{
                 return false
             }
         }
-        
-        //-- Check column wins
-        
         return true
     }
+    
+    fileprivate func isColumnWin(gameArray : [String], for position: Int) -> Bool{
+        
+        let rowPosition : Int = position/rows
+        let symbol = gameArray[position]
+        // check for column wins
+        let columnPosition: Int = columns - ((columns * (rowPosition + 1)) - position)
+        // 0 1 2   3 4 5   6 7 8
+        for rowIndex in 0...rows-1 {
+            let symbolIndex = (rowIndex * columns) + columnPosition
+            if(symbol != gameArray[symbolIndex]){
+                return false
+            }
+        }
+        return true
+    }
+    
+    
     
     func reset(){
         
