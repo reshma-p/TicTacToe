@@ -37,7 +37,7 @@ class GamePlayTest: XCTestCase {
         XCTAssertEqual([], tictacarray)
     }
     
-    func testPlayedMoveWinTopRow(){
+    func testIsRowWinTopRow(){
         let gamePlay = GamePlay()
         var tictacarray = gamePlay.start()
         tictacarray = gamePlay.play(position: 0, symbol: GamePlay.Symbol.X)
@@ -45,12 +45,12 @@ class GamePlayTest: XCTestCase {
         tictacarray = gamePlay.play(position: 2, symbol: GamePlay.Symbol.X)
         tictacarray = gamePlay.play(position: 4, symbol: GamePlay.Symbol.O)
         XCTAssertEqual(["X","X","X","","O","","","",""], tictacarray)
-        XCTAssertTrue(gamePlay.checkMoveWin(gameArray: tictacarray, for: 0))
-        XCTAssertTrue(gamePlay.checkMoveWin(gameArray: tictacarray, for: 1))
-        XCTAssertTrue(gamePlay.checkMoveWin(gameArray: tictacarray, for: 2))
+        XCTAssertTrue(gamePlay.isRowWin(gameArray: tictacarray, for: 0))
+        XCTAssertTrue(gamePlay.isRowWin(gameArray: tictacarray, for: 1))
+        XCTAssertTrue(gamePlay.isRowWin(gameArray: tictacarray, for: 2))
     }
     
-    func testPlayedMoveWinMiddleRow(){
+    func testIsRowWinMiddleRow(){
         let gamePlay = GamePlay()
         var tictacarray = gamePlay.start()
         tictacarray = gamePlay.play(position: 0, symbol: GamePlay.Symbol.O)
@@ -60,12 +60,12 @@ class GamePlayTest: XCTestCase {
         
         
         XCTAssertEqual(["O","","","X","X","X","","",""], tictacarray)
-        XCTAssertTrue(gamePlay.checkMoveWin(gameArray: tictacarray, for: 3))
-        XCTAssertTrue(gamePlay.checkMoveWin(gameArray: tictacarray, for: 4))
-        XCTAssertTrue(gamePlay.checkMoveWin(gameArray: tictacarray, for: 5))
+        XCTAssertTrue(gamePlay.isRowWin(gameArray: tictacarray, for: 3))
+        XCTAssertTrue(gamePlay.isRowWin(gameArray: tictacarray, for: 4))
+        XCTAssertTrue(gamePlay.isRowWin(gameArray: tictacarray, for: 5))
     }
     
-    func testPlayedMoveWinBottomRow(){
+    func testIsRowWinBottomRow(){
         let gamePlay = GamePlay()
         var tictacarray = gamePlay.start()
         tictacarray = gamePlay.play(position: 0, symbol: GamePlay.Symbol.O)
@@ -76,12 +76,12 @@ class GamePlayTest: XCTestCase {
         tictacarray = gamePlay.play(position: 7, symbol: GamePlay.Symbol.X)
         
         XCTAssertEqual(["O","","","O","O","","X","X","X"], tictacarray)
-        XCTAssertTrue(gamePlay.checkMoveWin(gameArray: tictacarray, for: 6))
-        XCTAssertTrue(gamePlay.checkMoveWin(gameArray: tictacarray, for: 7))
-        XCTAssertTrue(gamePlay.checkMoveWin(gameArray: tictacarray, for: 8))
+        XCTAssertTrue(gamePlay.isRowWin(gameArray: tictacarray, for: 6))
+        XCTAssertTrue(gamePlay.isRowWin(gameArray: tictacarray, for: 7))
+        XCTAssertTrue(gamePlay.isRowWin(gameArray: tictacarray, for: 8))
     }
     
-    func testPlayedNoRowWinForSymbol(){
+    func testNoRowWinsForSymbol(){
         let gamePlay = GamePlay()
         var tictacarray = gamePlay.start()
         tictacarray = gamePlay.play(position: 0, symbol: GamePlay.Symbol.O)
@@ -93,12 +93,12 @@ class GamePlayTest: XCTestCase {
         tictacarray = gamePlay.play(position: 2, symbol: GamePlay.Symbol.O)
         
         XCTAssertEqual(["O","","O","O","O","","X","X","X"], tictacarray)
-        XCTAssertFalse(gamePlay.checkMoveWin(gameArray: tictacarray, for: 3))
-        XCTAssertFalse(gamePlay.checkMoveWin(gameArray: tictacarray, for: 5))
-        XCTAssertFalse(gamePlay.checkMoveWin(gameArray: tictacarray, for: 2))
+        XCTAssertFalse(gamePlay.isRowWin(gameArray: tictacarray, for: 3))
+        XCTAssertFalse(gamePlay.isRowWin(gameArray: tictacarray, for: 5))
+        XCTAssertFalse(gamePlay.isRowWin(gameArray: tictacarray, for: 2))
     }
     
-    func testPlayedMoveWinOnLeftColumn(){
+    func testIsColumnWinLeftColumn(){
         let gamePlay = GamePlay()
         var tictacarray = gamePlay.start()
         tictacarray = gamePlay.play(position: 0, symbol: GamePlay.Symbol.O)
@@ -109,8 +109,87 @@ class GamePlayTest: XCTestCase {
         tictacarray = gamePlay.play(position: 7, symbol: GamePlay.Symbol.X)
         
         XCTAssertEqual(["O","","","O","O","","O","X","X"], tictacarray)
-        XCTAssertTrue(gamePlay.checkMoveWin(gameArray: tictacarray, for: 0))
-        XCTAssertTrue(gamePlay.checkMoveWin(gameArray: tictacarray, for: 3))
-        XCTAssertTrue(gamePlay.checkMoveWin(gameArray: tictacarray, for: 6))
+        XCTAssertTrue(gamePlay.isColumnWin(gameArray: tictacarray, for: 0))
+        XCTAssertTrue(gamePlay.isColumnWin(gameArray: tictacarray, for: 3))
+        XCTAssertTrue(gamePlay.isColumnWin(gameArray: tictacarray, for: 6))
+    }
+    
+    
+    func testIsColumnWinMiddleColumn(){
+        let gamePlay = GamePlay()
+        var tictacarray = gamePlay.start()
+        tictacarray = gamePlay.play(position: 0, symbol: GamePlay.Symbol.O)
+        tictacarray = gamePlay.play(position: 1, symbol: GamePlay.Symbol.X)
+        tictacarray = gamePlay.play(position: 3, symbol: GamePlay.Symbol.O)
+        tictacarray = gamePlay.play(position: 4, symbol: GamePlay.Symbol.X)
+        tictacarray = gamePlay.play(position: 8, symbol: GamePlay.Symbol.X)
+        tictacarray = gamePlay.play(position: 7, symbol: GamePlay.Symbol.X)
+        
+        XCTAssertEqual(["O","X","","O","X","","","X","X"], tictacarray)
+        XCTAssertTrue(gamePlay.isColumnWin(gameArray: tictacarray, for: 1))
+        XCTAssertTrue(gamePlay.isColumnWin(gameArray: tictacarray, for: 4))
+        XCTAssertTrue(gamePlay.isColumnWin(gameArray: tictacarray, for: 7))
+        
+    }
+    
+    
+    func testIsColumnWinRigtColumn(){
+        let gamePlay = GamePlay()
+        var tictacarray = gamePlay.start()
+        tictacarray = gamePlay.play(position: 0, symbol: GamePlay.Symbol.O)
+        tictacarray = gamePlay.play(position: 2, symbol: GamePlay.Symbol.X)
+        tictacarray = gamePlay.play(position: 4, symbol: GamePlay.Symbol.O)
+        tictacarray = gamePlay.play(position: 5, symbol: GamePlay.Symbol.X)
+        tictacarray = gamePlay.play(position: 8, symbol: GamePlay.Symbol.X)
+        
+        XCTAssertEqual(["O","","X","","O","X","","","X"], tictacarray)
+        XCTAssertTrue(gamePlay.isColumnWin(gameArray: tictacarray, for: 2))
+        XCTAssertTrue(gamePlay.isColumnWin(gameArray: tictacarray, for: 5))
+        XCTAssertTrue(gamePlay.isColumnWin(gameArray: tictacarray, for: 8))
+        
+    }
+    
+    func testIsColumnWinNoWins(){
+        let gamePlay = GamePlay()
+        var tictacarray = gamePlay.start()
+        tictacarray = gamePlay.play(position: 0, symbol: GamePlay.Symbol.O)
+        tictacarray = gamePlay.play(position: 2, symbol: GamePlay.Symbol.O)
+        tictacarray = gamePlay.play(position: 4, symbol: GamePlay.Symbol.O)
+        tictacarray = gamePlay.play(position: 5, symbol: GamePlay.Symbol.X)
+        tictacarray = gamePlay.play(position: 8, symbol: GamePlay.Symbol.X)
+        
+        XCTAssertEqual(["O","","O","","O","X","","","X"], tictacarray)
+        XCTAssertFalse(gamePlay.isColumnWin(gameArray: tictacarray, for: 2))
+        XCTAssertFalse(gamePlay.isColumnWin(gameArray: tictacarray, for: 5))
+        XCTAssertFalse(gamePlay.isColumnWin(gameArray: tictacarray, for: 8))
+    }
+    
+    func testOutOfBoundsForColumnWins(){
+        let gamePlay = GamePlay()
+        var tictacarray = gamePlay.start()
+        tictacarray = gamePlay.play(position: 0, symbol: GamePlay.Symbol.O)
+        tictacarray = gamePlay.play(position: 2, symbol: GamePlay.Symbol.O)
+        tictacarray = gamePlay.play(position: 4, symbol: GamePlay.Symbol.O)
+        tictacarray = gamePlay.play(position: 5, symbol: GamePlay.Symbol.X)
+        tictacarray = gamePlay.play(position: 8, symbol: GamePlay.Symbol.X)
+        
+        XCTAssertEqual(["O","","O","","O","X","","","X"], tictacarray)
+        XCTAssertFalse(gamePlay.isColumnWin(gameArray: tictacarray, for: 2))
+    }
+    
+    func testDiagonalWins(){
+        let gamePlay = GamePlay()
+        var tictacarray = gamePlay.start()
+        tictacarray = gamePlay.play(position: 0, symbol: GamePlay.Symbol.O)
+        tictacarray = gamePlay.play(position: 2, symbol: GamePlay.Symbol.O)
+        tictacarray = gamePlay.play(position: 4, symbol: GamePlay.Symbol.O)
+        tictacarray = gamePlay.play(position: 5, symbol: GamePlay.Symbol.X)
+        tictacarray = gamePlay.play(position: 8, symbol: GamePlay.Symbol.O)
+    
+        XCTAssertEqual(["O","","O","","O","X","","","O"], tictacarray)
+       
+        XCTAssertTrue(gamePlay.isDiagonalWin(gameArray: tictacarray, for: 0))
+        XCTAssertTrue(gamePlay.isDiagonalWin(gameArray: tictacarray, for: 4))
+        XCTAssertTrue(gamePlay.isDiagonalWin(gameArray: tictacarray, for: 8))
     }
 }

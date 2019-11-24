@@ -10,6 +10,7 @@ import Foundation
 
 class GamePlay{
     
+    // MARK: Variables
     enum Symbol:String{
         case X
         case O
@@ -21,7 +22,25 @@ class GamePlay{
     let columns = 3
     let numberOfItems = 9
     
+    // MARK: private member functions
+    fileprivate func isPositionInRange(_ position: Int) -> Bool{
+        return (0...(rows * columns)).contains(position)
+    }
     
+    fileprivate func calculateRowIndex(_ position: Int) -> Int{
+        return position/rows
+    }
+    
+    fileprivate func calculateColumnIndex(_ position: Int) -> Int{
+        let rowPosition = calculateRowIndex(position)
+        return columns - ((columns * (rowPosition + 1)) - position)
+    }
+    
+    fileprivate func calculatePositionIndex(row: Int, column: Int) -> Int{
+        return (row * columns) + column
+    }
+    
+    // MARK: Game play functions
     func start() -> [String]{
         self.currentGameMatrix = Array.init(repeating: "", count: numberOfItems)
         return self.currentGameMatrix;
@@ -44,9 +63,12 @@ class GamePlay{
         return false
     }
     
-    fileprivate func isRowWin(gameArray : [String], for position: Int) -> Bool{
+    func isRowWin(gameArray : [String], for position: Int) -> Bool{
+        guard isPositionInRange(position) else {
+           return false
+       }
         
-        let rowPosition : Int = position/rows
+        let rowPosition : Int = calculateRowIndex(position)
         let colRange = (columns * rowPosition)...((columns * (rowPosition + 1)) - 1)
         let symbol = gameArray[position]
         
@@ -59,15 +81,18 @@ class GamePlay{
         return true
     }
     
-    fileprivate func isColumnWin(gameArray : [String], for position: Int) -> Bool{
+    func isColumnWin(gameArray : [String], for position: Int) -> Bool{
         
-        let rowPosition : Int = position/rows
+        guard isPositionInRange(position) else {
+            return false
+        }
+         let rowPosition : Int = calculateRowIndex(position)
         let symbol = gameArray[position]
         // check for column wins
-        let columnPosition: Int = columns - ((columns * (rowPosition + 1)) - position)
+        let columnPosition: Int = calculateColumnIndex(position)
         // 0 1 2   3 4 5   6 7 8
         for rowIndex in 0...rows-1 {
-            let symbolIndex = (rowIndex * columns) + columnPosition
+            let symbolIndex = calculatePositionIndex(row: rowIndex, column: columnPosition)
             if(symbol != gameArray[symbolIndex]){
                 return false
             }
@@ -75,6 +100,36 @@ class GamePlay{
         return true
     }
     
+    
+    
+    func isDiagonalWin(gameArray : [String], for position: Int) -> Bool{
+        guard isPositionInRange(position) else {
+            return false
+        }
+        
+        let rowPosition: Int = position/rows
+        let symbol = gameArray[position]
+        
+        var indexBack = rowPosition - 1
+        while(indexBack >= 0){
+            let symbolIndex = calculatePositionIndex(row: indexBack, column: indexBack)
+            if(symbol != gameArray[symbolIndex]) {
+                return false
+            }
+            indexBack = indexBack - 1
+        }
+        
+        indexBack = rowPosition + 1
+        while(indexBack < rows){
+            let symbolIndex = calculatePositionIndex(row: indexBack, column: indexBack)
+            if(symbol != gameArray[symbolIndex]) {
+                return false
+            }
+            indexBack = indexBack + 1
+        }
+        
+        return true
+    }
     
     
     func reset(){
