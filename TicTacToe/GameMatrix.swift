@@ -14,10 +14,10 @@ public class GameMatrix{
     // Flat array that holds the values for the 3x3 matrix
     var items : [String] = []
     // Square matrix of 3x3 size
-    let matrixSize = 3
+    let size = 3
     // Items in the flat array structure
-    private var numberOfItems : Int {
-        return matrixSize * matrixSize
+    var numberOfItems : Int {
+        return size * size
     }
     
     // MARK: Lifecycle
@@ -26,26 +26,26 @@ public class GameMatrix{
     }
     
     func isPositionInRange(_ position: Int) -> Bool{
-        return (0...(matrixSize * matrixSize)).contains(position)
+        return (0...(size * size)).contains(position)
     }
     
     func isPositionOnDiagonal(_ position: Int) -> Bool{
         let rowPosition = calculateRowIndex(position)
         let columnPosition = calculateColumnIndex(position)
         
-        return ((matrixSize - rowPosition - 1) == columnPosition || rowPosition == columnPosition)
+        return ((size - rowPosition - 1) == columnPosition || rowPosition == columnPosition)
     }
     
     func calculateRowIndex(_ position: Int) -> Int{
-        return position/matrixSize
+        return position/size
     }
     
     func calculateColumnIndex(_ position: Int) -> Int{
         let rowPosition = calculateRowIndex(position)
-        return matrixSize - ((matrixSize * (rowPosition + 1)) - position)
+        return size - ((size * (rowPosition + 1)) - position)
     }
     
     func calculatePositionIndex(row: Int, column: Int) -> Int{
-        return (row * matrixSize) + column
+        return (row * size) + column
     }
 }

@@ -18,13 +18,7 @@ class GamePlay{
     
     
     private(set) var gameMatrix: GameMatrix?
-    // Square matrix of 3x3 size
-    let matrixSize = 3
-    let rows = 3
-    let columns = 3
-    var numberOfItems : Int {
-        matrixSize * matrixSize
-    }
+
     
     
     // MARK: private member functions
@@ -38,7 +32,7 @@ class GamePlay{
     
     
     func play(position: Int, symbol: Symbol) ->  [String]{
-        guard let gameMatrix = self.gameMatrix, position < numberOfItems else {
+        guard let gameMatrix = self.gameMatrix, position < gameMatrix.numberOfItems else {
             return []
         }
         gameMatrix.items[position] = symbol.rawValue
@@ -51,7 +45,7 @@ class GamePlay{
        }
         
         let rowPosition : Int = gameMatrix.calculateRowIndex(position)
-        let colRange = (columns * rowPosition)...((columns * (rowPosition + 1)) - 1)
+        let colRange = (gameMatrix.matrixSize * rowPosition)...((columns * (rowPosition + 1)) - 1)
         let symbol = gameArray[position]
         
         //-- Check row wins
@@ -72,7 +66,7 @@ class GamePlay{
         // check for column wins
         let columnPosition: Int = gameMatrix.calculateColumnIndex(position)
         // 0 1 2   3 4 5   6 7 8
-        for rowIndex in 0...rows-1 {
+        for rowIndex in 0...gameMatrix.size-1 {
             let symbolIndex = gameMatrix.calculatePositionIndex(row: rowIndex, column: columnPosition)
             if(symbol != gameArray[symbolIndex]){
                 return false
@@ -89,12 +83,12 @@ class GamePlay{
         }
         let symbol = gameArray[position]
         
-        return checkDiagonal(index: 0, increment: (rows + 1), gameArray,symbol) || checkDiagonal(index: rows - 1, increment: (rows - 1), gameArray,symbol)
+        return checkDiagonal(index: 0, increment: (gameMatrix.size + 1), gameArray,symbol) || checkDiagonal(index: gameMatrix.size - 1, increment: (gameMatrix.size - 1), gameArray,symbol)
     }
     
     func checkDiagonal(index: Int, increment: Int, _ gameArray: [String], _ symbol: String) -> Bool{
         var index = index
-        for _ in 1...rows {
+        for _ in 1...gameMatrix.matrixSize {
             let symbolIndex = index
             if(symbol != gameArray[symbolIndex]) {
                 return false
