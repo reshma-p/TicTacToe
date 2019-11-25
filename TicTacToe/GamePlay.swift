@@ -27,6 +27,14 @@ class GamePlay{
         return (0...(rows * columns)).contains(position)
     }
     
+    
+    fileprivate func isPositionOnDiagonal(_ position: Int) -> Bool{
+        let rowPosition = calculateRowIndex(position)
+        let columnPosition = calculateColumnIndex(position)
+        
+        return ((rows - rowPosition - 1) == columnPosition || rowPosition == columnPosition)
+    }
+    
     fileprivate func calculateRowIndex(_ position: Int) -> Int{
         return position/rows
     }
@@ -86,7 +94,6 @@ class GamePlay{
         guard isPositionInRange(position) else {
             return false
         }
-         let rowPosition : Int = calculateRowIndex(position)
         let symbol = gameArray[position]
         // check for column wins
         let columnPosition: Int = calculateColumnIndex(position)
@@ -103,33 +110,27 @@ class GamePlay{
     
     
     func isDiagonalWin(gameArray : [String], for position: Int) -> Bool{
-        guard isPositionInRange(position) else {
+        guard isPositionInRange(position) && isPositionOnDiagonal(position) else {
             return false
         }
-        
-        let rowPosition: Int = position/rows
         let symbol = gameArray[position]
         
-        var indexBack = rowPosition - 1
-        while(indexBack >= 0){
-            let symbolIndex = calculatePositionIndex(row: indexBack, column: indexBack)
+        return checkDiagonal(index: 0, increment: (rows + 1), gameArray,symbol) || checkDiagonal(index: rows - 1, increment: (rows - 1), gameArray,symbol)
+    }
+    
+    func checkDiagonal(index: Int, increment: Int, _ gameArray: [String], _ symbol: String) -> Bool{
+        var index = index
+        for _ in 1...rows {
+            let symbolIndex = index
             if(symbol != gameArray[symbolIndex]) {
                 return false
             }
-            indexBack = indexBack - 1
+            index = index + increment
         }
-        
-        indexBack = rowPosition + 1
-        while(indexBack < rows){
-            let symbolIndex = calculatePositionIndex(row: indexBack, column: indexBack)
-            if(symbol != gameArray[symbolIndex]) {
-                return false
-            }
-            indexBack = indexBack + 1
-        }
-        
         return true
     }
+    
+    
     
     
     func reset(){
