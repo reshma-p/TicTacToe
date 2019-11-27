@@ -16,19 +16,16 @@ class GamePlay{
         case O
     }
     
-    
+    // MARK: private member functions
     private(set) var gameMatrix: GameMatrix?
 
-    
-    
-    // MARK: private member functions
-    
     
     // MARK: Game play functions
     func start() -> [String]{
         self.gameMatrix = GameMatrix()
         return self.gameMatrix?.items ?? [];
     }
+    
     
     
     func play(position: Int, symbol: Symbol) ->  [String]{
@@ -45,7 +42,7 @@ class GamePlay{
        }
         
         let rowPosition : Int = gameMatrix.calculateRowIndex(position)
-        let colRange = (gameMatrix.matrixSize * rowPosition)...((columns * (rowPosition + 1)) - 1)
+        let colRange = (gameMatrix.size * rowPosition)...((gameMatrix.size * (rowPosition + 1)) - 1)
         let symbol = gameArray[position]
         
         //-- Check row wins
@@ -75,8 +72,6 @@ class GamePlay{
         return true
     }
     
-    
-    
     func isDiagonalWin(gameArray : [String], for position: Int) -> Bool{
         guard let gameMatrix = self.gameMatrix, gameMatrix.isPositionInRange(position) && gameMatrix.isPositionOnDiagonal(position) else {
             return false
@@ -87,8 +82,12 @@ class GamePlay{
     }
     
     func checkDiagonal(index: Int, increment: Int, _ gameArray: [String], _ symbol: String) -> Bool{
+        guard let gameMatrix = self.gameMatrix else {
+            assertionFailure("Diagonal check called on empty gameMatrix")
+            return false
+        }
         var index = index
-        for _ in 1...gameMatrix.matrixSize {
+        for _ in 1...gameMatrix.size {
             let symbolIndex = index
             if(symbol != gameArray[symbolIndex]) {
                 return false
