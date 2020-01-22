@@ -21,6 +21,8 @@
 		4E7398C72387530A00089EA9 /* GamePlayTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7398C62387530A00089EA9 /* GamePlayTest.swift */; };
 		4E7398C82387536800089EA9 /* GamePlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7398B62387519E00089EA9 /* GamePlay.swift */; };
 		4EB5E9632348171C00B723B2 /* ToDo-list.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4EB5E9622348171C00B723B2 /* ToDo-list.rtf */; };
+		4EB6C3F023D8FA9600A80A66 /* GameGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB6C3EF23D8FA9600A80A66 /* GameGrid.swift */; };
+		4EB6C3F123D8FA9600A80A66 /* GameGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB6C3EF23D8FA9600A80A66 /* GameGrid.swift */; };
 		4EB9781F238C9A7D00F79057 /* GameMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E507307238C996100FD4FF6 /* GameMatrix.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +54,7 @@
 		4E7398C0238752F800089EA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E7398C62387530A00089EA9 /* GamePlayTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlayTest.swift; sourceTree = "<group>"; };
 		4EB5E9622348171C00B723B2 /* ToDo-list.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = "ToDo-list.rtf"; sourceTree = "<group>"; };
+		4EB6C3EF23D8FA9600A80A66 /* GameGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameGrid.swift; path = TicTacToe/View/GameGrid.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +116,7 @@
 			children = (
 				4E480A6E23480DA400FFFB0A /* HomeViewController.swift */,
 				4E480A7023480DBB00FFFB0A /* GameViewController.swift */,
+				4EB6C3EF23D8FA9600A80A66 /* GameGrid.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -233,6 +237,7 @@
 				4E7398B72387519E00089EA9 /* GamePlay.swift in Sources */,
 				4E480A7123480DBB00FFFB0A /* GameViewController.swift in Sources */,
 				4E480A5A2348081900FFFB0A /* ViewController.swift in Sources */,
+				4EB6C3F023D8FA9600A80A66 /* GameGrid.swift in Sources */,
 				4E507308238C996100FD4FF6 /* GameMatrix.swift in Sources */,
 				4E480A582348081900FFFB0A /* AppDelegate.swift in Sources */,
 				4E480A6F23480DA400FFFB0A /* HomeViewController.swift in Sources */,
@@ -245,6 +250,7 @@
 			files = (
 				4E7398BF238752F800089EA9 /* TicTacToeTests.swift in Sources */,
 				4E7398C72387530A00089EA9 /* GamePlayTest.swift in Sources */,
+				4EB6C3F123D8FA9600A80A66 /* GameGrid.swift in Sources */,
 				4EB9781F238C9A7D00F79057 /* GameMatrix.swift in Sources */,
 				4E7398C82387536800089EA9 /* GamePlay.swift in Sources */,
 			);
