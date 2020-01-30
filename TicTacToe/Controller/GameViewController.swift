@@ -18,6 +18,9 @@ class GameViewController: UIViewController {
     var gameMatrix: GameMatrix!
     let squareSideLength = 80
     
+    //MARK: View Model
+    let viewModel: GameViewModel = GameViewModel()
+    
     // MARK: Life cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,8 +38,7 @@ class GameViewController: UIViewController {
         
         if sender.state == .ended {
             let tappedLocation = sender.location(in: gridView)
-            print("Tapping the grid, yay!!! \(tappedLocation)")
-            calculateMatrixIndex(from: tappedLocation)
+            viewModel.onGridTap(position: (Double(tappedLocation.x), Double(tappedLocation.y)))
         }
     }
     
@@ -51,9 +53,15 @@ class GameViewController: UIViewController {
         let x = ((Int(column)) * squareSideLength)
         let y = (Int(row)) * squareSideLength
         gridView.refresh(in: CGRect(x: x, y: y, width: 80, height: 80))
+        
+        print("Game matrix: \(gameMatrix.items)")
     }
     
    
+}
+
+extension GameViewController: GameViewModelDelegate {
+    
 }
 
 

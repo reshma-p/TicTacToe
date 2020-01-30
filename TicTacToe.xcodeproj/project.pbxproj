@@ -16,6 +16,10 @@
 		4E480A6F23480DA400FFFB0A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E480A6E23480DA400FFFB0A /* HomeViewController.swift */; };
 		4E480A7123480DBB00FFFB0A /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E480A7023480DBB00FFFB0A /* GameViewController.swift */; };
 		4E507308238C996100FD4FF6 /* GameMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E507307238C996100FD4FF6 /* GameMatrix.swift */; };
+		4E70AC9923E38DA0002D4217 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E70AC9823E38DA0002D4217 /* GameViewModel.swift */; };
+		4E70AC9A23E38DA0002D4217 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E70AC9823E38DA0002D4217 /* GameViewModel.swift */; };
+		4E70AC9C23E38DBF002D4217 /* GameViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E70AC9B23E38DBF002D4217 /* GameViewModelType.swift */; };
+		4E70AC9D23E38DBF002D4217 /* GameViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E70AC9B23E38DBF002D4217 /* GameViewModelType.swift */; };
 		4E7398B72387519E00089EA9 /* GamePlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7398B62387519E00089EA9 /* GamePlay.swift */; };
 		4E7398BF238752F800089EA9 /* TicTacToeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7398BE238752F800089EA9 /* TicTacToeTests.swift */; };
 		4E7398C72387530A00089EA9 /* GamePlayTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7398C62387530A00089EA9 /* GamePlayTest.swift */; };
@@ -48,6 +52,8 @@
 		4E480A6E23480DA400FFFB0A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		4E480A7023480DBB00FFFB0A /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		4E507307238C996100FD4FF6 /* GameMatrix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMatrix.swift; sourceTree = "<group>"; };
+		4E70AC9823E38DA0002D4217 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		4E70AC9B23E38DBF002D4217 /* GameViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModelType.swift; sourceTree = "<group>"; };
 		4E7398B62387519E00089EA9 /* GamePlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlay.swift; sourceTree = "<group>"; };
 		4E7398BC238752F800089EA9 /* TicTacToeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TicTacToeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E7398BE238752F800089EA9 /* TicTacToeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeTests.swift; sourceTree = "<group>"; };
@@ -117,6 +123,8 @@
 				4E480A6E23480DA400FFFB0A /* HomeViewController.swift */,
 				4E480A7023480DBB00FFFB0A /* GameViewController.swift */,
 				4EB6C3EF23D8FA9600A80A66 /* GameGrid.swift */,
+				4E70AC9823E38DA0002D4217 /* GameViewModel.swift */,
+				4E70AC9B23E38DBF002D4217 /* GameViewModelType.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -237,7 +245,9 @@
 				4E7398B72387519E00089EA9 /* GamePlay.swift in Sources */,
 				4E480A7123480DBB00FFFB0A /* GameViewController.swift in Sources */,
 				4E480A5A2348081900FFFB0A /* ViewController.swift in Sources */,
+				4E70AC9C23E38DBF002D4217 /* GameViewModelType.swift in Sources */,
 				4EB6C3F023D8FA9600A80A66 /* GameGrid.swift in Sources */,
+				4E70AC9923E38DA0002D4217 /* GameViewModel.swift in Sources */,
 				4E507308238C996100FD4FF6 /* GameMatrix.swift in Sources */,
 				4E480A582348081900FFFB0A /* AppDelegate.swift in Sources */,
 				4E480A6F23480DA400FFFB0A /* HomeViewController.swift in Sources */,
@@ -248,6 +258,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E70AC9D23E38DBF002D4217 /* GameViewModelType.swift in Sources */,
+				4E70AC9A23E38DA0002D4217 /* GameViewModel.swift in Sources */,
 				4E7398BF238752F800089EA9 /* TicTacToeTests.swift in Sources */,
 				4E7398C72387530A00089EA9 /* GamePlayTest.swift in Sources */,
 				4EB6C3F123D8FA9600A80A66 /* GameGrid.swift in Sources */,
