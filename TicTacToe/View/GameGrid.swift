@@ -11,20 +11,38 @@ import UIKit
 @IBDesignable
 class GameGrid: UIView {
     
+    // MARK: Constant member variables
     let numColumns = 3
     let numRows = 3
     let strokeColor = UIColor.red
     let fillColor = UIColor.clear
+    let symbolColor = UIColor.black
     
+    // MARK: Member variables
     var isSymbolDrawPending = false
-    
     var symbol: Symbol?
     
     
     /// Draws the grid for the game
     override func draw(_ rect: CGRect) {
+        createGrid(rect)
         
+        if let symbol = self.symbol, isSymbolDrawPending {
+            add(symbol: symbol.value, in: symbol.rect)
+            isSymbolDrawPending = false
+        }
+    }
 
+    
+    func refresh(in rect: CGRect){
+        symbol = Symbol(value: "X", rect: rect)
+        isSymbolDrawPending = true
+        
+        setNeedsDisplay()
+    }
+    
+    // MAKR: Utilities for drawing the various aspects of the grid
+    func createGrid(_ rect: CGRect){
         let cellSize = rect.width / CGFloat(numColumns)
         let bezierPath = UIBezierPath()
         let offset: CGFloat = 0.0
@@ -46,29 +64,19 @@ class GameGrid: UIView {
 
         bezierPath.lineWidth = 1.0
         bezierPath.stroke()
-        
-        
-        if let symbol = self.symbol, isSymbolDrawPending {
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.alignment = .center
-
-            let attributes = [
-                NSAttributedString.Key.paragraphStyle: paragraphStyle,
-                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 80),
-                NSAttributedString.Key.foregroundColor: UIColor.blue
-            ]
-            let attributedString = NSAttributedString(string: symbol.value, attributes: attributes)
-
-            attributedString.draw(in: symbol.rect)
-            isSymbolDrawPending = false
-        }
     }
+    
+    func add(symbol: String, in rect: CGRect){
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
 
-    func refresh(in rect: CGRect){
-        symbol = Symbol(value: "X", rect: rect)
-        isSymbolDrawPending = true
-        
-        setNeedsDisplay()
+        let attributes = [
+            NSAttributedString.Key.paragraphStyle: paragraphStyle,
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 80),
+            NSAttributedString.Key.foregroundColor: symbolColor
+        ]
+        let attributedString = NSAttributedString(string: symbol, attributes: attributes)
+        attributedString.draw(in: rect)
     }
 }
 
@@ -77,3 +85,5 @@ struct Symbol{
     var value: String
     var rect: CGRect
 }
+
+
