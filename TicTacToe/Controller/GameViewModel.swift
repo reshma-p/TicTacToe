@@ -12,6 +12,7 @@ import Foundation
 class GameViewModel: GameViewModelType {
     let squareSideLength = 80
     var gameMatrix: GameMatrix = GameMatrix()
+    weak var delegate: GameViewModelDelegate?
     
     var symbolX = true
     
@@ -24,7 +25,8 @@ class GameViewModel: GameViewModelType {
         gameMatrix.items[position] = symbolX ? "X" : "0"
         symbolX = !symbolX
         
-         print("Game matrix: \(gameMatrix.items)")
+        delegate?.updateGrid(withGameMatrix: gameMatrix)
+        //- Tell the view to updateGrid(withGameMatrix : GameMatrix)
     }
     
 //    private func calculateMatrixIndex(from tapPosition:  (Int, Int)){

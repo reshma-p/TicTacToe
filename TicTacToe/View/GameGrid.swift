@@ -20,23 +20,21 @@ class GameGrid: UIView {
     
     // MARK: Member variables
     var isSymbolDrawPending = false
-    var symbol: Symbol?
+    var symbols: [Symbol] = []
     
     
     /// Draws the grid for the game
     override func draw(_ rect: CGRect) {
         createGrid(rect)
         
-        if let symbol = self.symbol, isSymbolDrawPending {
+        for symbol in symbols {
             add(symbol: symbol.value, in: symbol.rect)
-            isSymbolDrawPending = false
         }
     }
 
     
-    func refresh(in rect: CGRect){
-        symbol = Symbol(value: "X", rect: rect)
-        isSymbolDrawPending = true
+    func refresh(with symbols: [Symbol]){
+        self.symbols = symbols
         
         setNeedsDisplay()
     }

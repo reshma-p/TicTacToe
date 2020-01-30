@@ -24,56 +24,33 @@ class GameViewController: UIViewController {
     // MARK: Life cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        viewModel.delegate = self
         // Adding tapgesture to the grid
         // TODO: Should move to the GridView?
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         gridView.addGestureRecognizer(tapGesture)
-        
         gameMatrix = GameMatrix()
         
     }
     
     @objc func handleTap(sender: UITapGestureRecognizer) {
-        
         if sender.state == .ended {
             let tappedLocation = sender.location(in: gridView)
             viewModel.onGridTap(position: (Double(tappedLocation.x), Double(tappedLocation.y)))
         }
     }
-    
-    
-    private func calculateMatrixIndex(from tapPosition: CGPoint){
-        let row = Double(tapPosition.y) / Double(squareSideLength) // 1 2 3
-        let column = Double(tapPosition.x) / Double(squareSideLength)  // 1 2 3
-        
-        let position =  gameMatrix.calculatePositionIndex(row: Int(row), column: Int(column))
-
-        gameMatrix.items[position] = "X"
-        let x = ((Int(column)) * squareSideLength)
-        let y = (Int(row)) * squareSideLength
-        gridView.refresh(in: CGRect(x: x, y: y, width: 80, height: 80))
-        
-        print("Game matrix: \(gameMatrix.items)")
-    }
-    
    
 }
 
 extension GameViewController: GameViewModelDelegate {
-    
+    func updateGrid(withGameMatrix: GameMatrix) {
+        
+        let symbolsToDraw = gameMatrix.items.enumerated().map { (index,value) -> Symbol in
+            let x = Int(gameMatrix.calculateColumnIndex(index)) * viewModel.squareSideLength
+            let y = Int(gameMatrix.calculateRowIndex(index)) * viewModel.squareSideLength
+            return Symbol(value: value, rect: CGRect(x: x, y: y, width: viewModel.squareSideLength, height: viewModel.squareSideLength))
+        }
+        
+        gridView.refresh(with: symbolsToDraw)
+    }
 }
-
-
-/**
- 
- 1  2 3
- 4 5 6
- 7 8 9
- 
- 
- 
-    00 01 02
-    10 11 12
-    20 21 22
- */

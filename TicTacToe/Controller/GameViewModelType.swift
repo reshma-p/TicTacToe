@@ -8,13 +8,18 @@
 
 import Foundation
 
-protocol GameViewModelType {
+protocol GameViewModelType: class {
     
+    // MARK: Properties
+    
+    
+    // MARK: Events
     func onGridTap(position: (Double, Double))
 }
 
 
-protocol GameViewModelDelegate {
+protocol GameViewModelDelegate: class {
     
-//    addItemToGrid()
+    // MARK: Events
+    func updateGrid(withGameMatrix : GameMatrix)
 }
