@@ -19,7 +19,7 @@ class GameGrid: UIView {
     let symbolColor = UIColor.black
     
     // MARK: Member variables
-    var isSymbolDrawPending = false
+//    var isSymbolDrawPending = false
     var symbols: [Symbol] = []
     
     
@@ -32,7 +32,7 @@ class GameGrid: UIView {
         }
     }
 
-    
+    /// Called by the controller of this view to update it.
     func refresh(with symbols: [Symbol]){
         self.symbols = symbols
         
@@ -40,31 +40,46 @@ class GameGrid: UIView {
     }
     
     // MAKR: Utilities for drawing the various aspects of the grid
-    func createGrid(_ rect: CGRect){
+    private func createGrid(_ rect: CGRect){
         let cellSize = rect.width / CGFloat(numColumns)
         let bezierPath = UIBezierPath()
         let offset: CGFloat = 0.0
 
-        // Draw vertical lines
-        for i in 0...numColumns {
+        
+        strokeColor.setStroke()
+
+        bezierPath.lineWidth = 2.0
+        
+        bezierPath.move(to: CGPoint(x: 0, y: 0))
+        bezierPath.addLine(to: CGPoint(x: rect.origin.x + rect.width, y: rect.origin.y))
+        bezierPath.addLine(to: CGPoint(x: rect.origin.x + rect.width, y: rect.origin.y + rect.height))
+        bezierPath.addLine(to: CGPoint(x: rect.origin.x, y: rect.origin.y + rect.height))
+        bezierPath.close()
+
+//        // Draw vertical lines
+        print("====Drawing vertical lines ====== ")
+        for i in 1...numColumns-1 {
            let x = rect.origin.x + CGFloat(i) * cellSize
            bezierPath.move(to: CGPoint(x: x, y: rect.origin.y))
            bezierPath.addLine(to: CGPoint(x: x, y: rect.origin.y + CGFloat(numRows) * cellSize))
+           print("move to x:\(x) y:\(rect.origin.y) ")
+           print("line from x:\(x) to y:\(rect.origin.y + CGFloat(numRows) * cellSize)) ")
         }
         // Draw horizontal lines
+        print("====Drawing horizontal lines ====== ")
         for i in 0...numRows {
            let y = rect.origin.y + CGFloat(i) * cellSize + offset
            bezierPath.move(to: CGPoint(x: rect.origin.x, y: y))
            bezierPath.addLine(to: CGPoint(x: rect.origin.x + rect.width, y: y))
+            print("move to x:\( rect.origin.x) y:\(y) ")
+            print("line from (\( rect.origin.x),\(y)) to (\(rect.origin.x + rect.width),\(y))")
         }
-        strokeColor.setStroke()
-        fillColor.setFill()
 
-        bezierPath.lineWidth = 1.0
+        
         bezierPath.stroke()
     }
     
-    func add(symbol: String, in rect: CGRect){
+    private func add(symbol: String, in rect: CGRect){
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
 

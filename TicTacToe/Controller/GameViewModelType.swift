@@ -22,4 +22,6 @@ protocol GameViewModelDelegate: class {
     
     // MARK: Events
     func updateGrid(withGameMatrix : GameMatrix)
+    
+    func updateGameCompletion(outCome: GameOutcome)
 }

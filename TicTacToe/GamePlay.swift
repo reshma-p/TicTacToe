@@ -20,22 +20,22 @@ class GamePlay{
     private(set) var gameMatrix: GameMatrix?
 
     
-    // MARK: Game play functions
-    func start() -> [String]{
-        self.gameMatrix = GameMatrix()
-        return self.gameMatrix?.items ?? [];
-    }
+//    // MARK: Game play functions
+//    func start() -> [String]{
+//        self.gameMatrix = GameMatrix()
+//        return self.gameMatrix?.items ?? [];
+//    }
     
-    
-    
-    func play(position: Int, symbol: Symbol) ->  [String]{
-        guard let gameMatrix = self.gameMatrix, position < gameMatrix.numberOfItems else {
-            return []
-        }
-        gameMatrix.items[position] = symbol.rawValue
-        return gameMatrix.items
-    }
-    
+//    
+//    
+//    func play(position: Int, symbol: Symbol) ->  [String]{
+//        guard let gameMatrix = self.gameMatrix, position < gameMatrix.numberOfItems else {
+//            return []
+//        }
+//        gameMatrix.items[position] = symbol.rawValue
+//        return gameMatrix.items
+//    }
+//    
     func isRowWin(gameArray : [String], for position: Int) -> Bool{
         guard let gameMatrix = self.gameMatrix, gameMatrix.isPositionInRange(position) else {
            return false

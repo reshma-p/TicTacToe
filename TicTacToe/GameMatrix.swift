@@ -12,7 +12,8 @@ public class GameMatrix{
     
     // MARK: Variables
     // Flat array that holds the values for the 3x3 matrix
-    var items : [String] = []
+    var items : [SymbolValue] = []
+    
     // Square matrix of 3x3 size
     let size = 3
     // Items in the flat array structure
@@ -22,9 +23,10 @@ public class GameMatrix{
     
     // MARK: Lifecycle
     init(){
-        self.items = Array.init(repeating: "", count: numberOfItems)
+        self.items = Array.init(repeating: .Empty, count: numberOfItems)
     }
     
+    // MARK: Helper functions
     func isPositionInRange(_ position: Int) -> Bool{
         return (0...(size * size)).contains(position)
     }
@@ -49,3 +51,10 @@ public class GameMatrix{
         return (row * size) + column
     }
 }
+
+
+enum SymbolValue:String{
+       case X
+       case O
+       case Empty = ""
+   }
