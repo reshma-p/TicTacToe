@@ -14,6 +14,7 @@ public class GameMatrix{
     // Flat array that holds the values for the 3x3 matrix
     var items : [SymbolValue] = []
     
+    
     // Square matrix of 3x3 size
     let size = 3
     // Items in the flat array structure

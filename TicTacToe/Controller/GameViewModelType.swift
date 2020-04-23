@@ -14,7 +14,7 @@ protocol GameViewModelType: class {
     
     
     // MARK: Events
-    func onGridTap(position: (Double, Double))
+    func onGridTap(position: (row: Int, column: Int))
 }
 
 

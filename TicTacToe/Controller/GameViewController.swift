@@ -27,12 +27,17 @@ class GameViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         gridView.addGestureRecognizer(tapGesture)
         
+        gameMessage.text = ""
+        
     }
     
     @objc func handleTap(sender: UITapGestureRecognizer) {
         if sender.state == .ended {
             let tappedLocation = sender.location(in: gridView)
-            viewModel.onGridTap(position: (Double(tappedLocation.x), Double(tappedLocation.y)))
+            
+            let row = Double(tappedLocation.y) / Double(viewModel.squareSideLength) // 1 2 3
+            let column = Double(tappedLocation.x) / Double(viewModel.squareSideLength)  // 1 2 3
+            viewModel.onGridTap(position: (row: Int(row), column: Int(column)))
         }
     }
     

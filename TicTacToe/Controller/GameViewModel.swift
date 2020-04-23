@@ -8,28 +8,34 @@
 
 import Foundation
 
-
 class GameViewModel: GameViewModelType {
-    let squareSideLength = 80
-    var gameMatrix: GameMatrix = GameMatrix()
     
+    // MARK: Private Member properties
+    private let gameMatrix: GameMatrix = GameMatrix()
+    
+    
+    private var gameState = GameState.New
+    private var toggleX = true
+    
+    // MARK: Member properties
     weak var delegate: GameViewModelDelegate?
+    let squareSideLength = 80
     
-    var gameState = GameState.New
     
-    var symbolX = true
-    
-    func onGridTap(position: (Double, Double)) {
+    // MARK: GameViewModelType Implementation
+    func onGridTap(position: (row: Int, column: Int)) {
         
-        guard gameState == .New else {
+        guard gameState != .Completed else {
             return
         }
         
-        let row = position.1 / Double(squareSideLength) // 1 2 3
-        let column = position.0 / Double(squareSideLength)  // 1 2 3
+        let position =  gameMatrix.calculatePositionIndex(row: position.0, column: position.1)
+        let symbolValue = toggleX ? SymbolValue.X : SymbolValue.O
         
-        let position =  gameMatrix.calculatePositionIndex(row: Int(row), column: Int(column))
-        let symbolValue = symbolX ? SymbolValue.X : SymbolValue.O
+        // Position already filled
+        guard gameMatrix.items[position] == .Empty else {
+            return
+        }
         
         gameMatrix.items[position] = symbolValue
        
@@ -47,11 +53,12 @@ class GameViewModel: GameViewModelType {
         }
     }
     
-    func nextMove() {
-        symbolX = !symbolX
+    // MARK: Private member functions
+    private func nextMove() {
+        toggleX = !toggleX
     }
     
-    func checkForWins(for position: Int) -> Bool{
+    private func checkForWins(for position: Int) -> Bool{
         let items = gameMatrix.items
         
         return isRowWin(gameArray: items, for: position) || isColumnWin(gameArray: items, for: position) || isDiagonalWin(gameArray: items, for: position)
@@ -114,7 +121,6 @@ class GameViewModel: GameViewModelType {
         }
         return true
     }
-    
 }
 
 

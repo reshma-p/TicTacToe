@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WFH-af-yAs">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -13,11 +13,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="TicTacToe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cWr-WI-f5l">
-                                <rect key="frame" x="129" y="455" width="156" height="40"/>
+                                <rect key="frame" x="109.66666666666669" y="413" width="156" height="40"/>
                                 <color key="backgroundColor" red="0.97584134340286255" green="0.2459321916103363" blue="0.0078102974221110344" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="156" id="C6P-gd-C4U"/>
@@ -51,11 +51,11 @@
             <objects>
                 <viewController id="Pt4-NG-mYI" customClass="GameViewController" customModule="TicTacToe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DSs-JK-4Gs">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iQX-3w-7vB" userLabel="GridView" customClass="GameGrid" customModule="TicTacToe" customModuleProvider="target">
-                                <rect key="frame" x="87" y="355" width="240" height="240"/>
+                                <rect key="frame" x="67.666666666666686" y="313" width="240" height="240"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -63,18 +63,18 @@
                                     <constraint firstAttribute="height" constant="240" id="Ffj-YM-hde"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y7k-uz-opa">
-                                <rect key="frame" x="207" y="750" width="0.0" height="0.0"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Game message" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y7k-uz-opa">
+                                <rect key="frame" x="116.66666666666667" y="158" width="141.66666666666663" height="49"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <color key="textColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="y7k-uz-opa" firstAttribute="centerX" secondItem="6LX-S9-VSF" secondAttribute="centerX" id="I5X-ht-isN"/>
-                            <constraint firstItem="y7k-uz-opa" firstAttribute="top" secondItem="iQX-3w-7vB" secondAttribute="bottom" constant="155" id="ZLC-qQ-3JL"/>
+                            <constraint firstItem="iQX-3w-7vB" firstAttribute="top" relation="greaterThanOrEqual" secondItem="y7k-uz-opa" secondAttribute="bottom" constant="40" id="2kz-6c-NPi"/>
+                            <constraint firstItem="y7k-uz-opa" firstAttribute="centerX" secondItem="6LX-S9-VSF" secondAttribute="centerX" id="gh0-9i-uVg"/>
                             <constraint firstItem="iQX-3w-7vB" firstAttribute="centerX" secondItem="6LX-S9-VSF" secondAttribute="centerX" id="l7g-Db-nsp"/>
                             <constraint firstItem="iQX-3w-7vB" firstAttribute="centerY" secondItem="6LX-S9-VSF" secondAttribute="centerY" id="yRS-l0-yIy"/>
                         </constraints>
@@ -88,7 +88,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AmU-4X-8Bl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1852.1739130434785" y="20.758928571428569"/>
+            <point key="canvasLocation" x="1852" y="20.689655172413794"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="eS9-eV-omE">
@@ -96,7 +96,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="WFH-af-yAs" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zrT-2i-cSl">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

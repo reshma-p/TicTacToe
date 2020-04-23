@@ -8,15 +8,19 @@
 
 import UIKit
 
+/// Enables live rendering
 @IBDesignable
+
 class GameGrid: UIView {
     
     // MARK: Constant member variables
     let numColumns = 3
     let numRows = 3
-    let strokeColor = UIColor.red
+    let strokeColor = UIColor.orange
     let fillColor = UIColor.clear
     let symbolColor = UIColor.black
+    
+    let lineWidth = CGFloat(2)
     
     // MARK: Member variables
 //    var isSymbolDrawPending = false
@@ -42,41 +46,37 @@ class GameGrid: UIView {
     // MAKR: Utilities for drawing the various aspects of the grid
     private func createGrid(_ rect: CGRect){
         let cellSize = rect.width / CGFloat(numColumns)
-        let bezierPath = UIBezierPath()
+        
+        // Solves Outside the Bounds issue when border drawn at the edge of the view : check https://www.raywenderlich.com/475829-core-graphics-tutorial-lines-rectangles-and-gradients for details
+        // https://www.raywenderlich.com/411-core-graphics-tutorial-part-1-getting-started
+        let strokeRect = rect.insetBy(dx: lineWidth/2, dy: lineWidth/2)
+        let bezierPath = UIBezierPath(rect: strokeRect)
         let offset: CGFloat = 0.0
 
         
         strokeColor.setStroke()
-
-        bezierPath.lineWidth = 2.0
+        fillColor.setFill()
+        bezierPath.lineWidth = lineWidth
         
-        bezierPath.move(to: CGPoint(x: 0, y: 0))
-        bezierPath.addLine(to: CGPoint(x: rect.origin.x + rect.width, y: rect.origin.y))
-        bezierPath.addLine(to: CGPoint(x: rect.origin.x + rect.width, y: rect.origin.y + rect.height))
-        bezierPath.addLine(to: CGPoint(x: rect.origin.x, y: rect.origin.y + rect.height))
-        bezierPath.close()
-
-//        // Draw vertical lines
-        print("====Drawing vertical lines ====== ")
-        for i in 1...numColumns-1 {
-           let x = rect.origin.x + CGFloat(i) * cellSize
-           bezierPath.move(to: CGPoint(x: x, y: rect.origin.y))
-           bezierPath.addLine(to: CGPoint(x: x, y: rect.origin.y + CGFloat(numRows) * cellSize))
-           print("move to x:\(x) y:\(rect.origin.y) ")
-           print("line from x:\(x) to y:\(rect.origin.y + CGFloat(numRows) * cellSize)) ")
+        
+        // Draw vertical lines
+        for i in 1..<numColumns {
+            let x = rect.origin.x + CGFloat(i) * cellSize
+            drawLine(using: bezierPath, from: CGPoint(x: x, y: rect.origin.y), to: CGPoint(x: x, y: rect.origin.y + CGFloat(numRows) * cellSize))
         }
+        
         // Draw horizontal lines
-        print("====Drawing horizontal lines ====== ")
-        for i in 0...numRows {
-           let y = rect.origin.y + CGFloat(i) * cellSize + offset
-           bezierPath.move(to: CGPoint(x: rect.origin.x, y: y))
-           bezierPath.addLine(to: CGPoint(x: rect.origin.x + rect.width, y: y))
-            print("move to x:\( rect.origin.x) y:\(y) ")
-            print("line from (\( rect.origin.x),\(y)) to (\(rect.origin.x + rect.width),\(y))")
+        for i in 1..<numRows {
+            let y = rect.origin.y + CGFloat(i) * cellSize + offset
+            drawLine(using: bezierPath, from: CGPoint(x: rect.origin.x, y: y), to: CGPoint(x: rect.origin.x + rect.width, y: y))
+            
         }
-
-        
         bezierPath.stroke()
+    }
+    
+    private func drawLine(using bezierPath: UIBezierPath, from fromPoint: CGPoint, to toPoint: CGPoint){
+        bezierPath.move(to: fromPoint)
+        bezierPath.addLine(to: toPoint)
     }
     
     private func add(symbol: String, in rect: CGRect){
@@ -85,7 +85,7 @@ class GameGrid: UIView {
 
         let attributes = [
             NSAttributedString.Key.paragraphStyle: paragraphStyle,
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 80),
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 70),
             NSAttributedString.Key.foregroundColor: symbolColor
         ]
         let attributedString = NSAttributedString(string: symbol, attributes: attributes)
