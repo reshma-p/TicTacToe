@@ -147,3 +147,17 @@ enum GameOutcome: String {
         }
     }
 }
+
+
+struct GameOutcomeVal: OptionSet{
+    let rawValue: Int
+
+    static let XWins = GameOutcomeVal(rawValue: 1 << 0)
+    static let OWins = GameOutcomeVal(rawValue: 1 << 1)
+    static let Draw = GameOutcomeVal(rawValue: 1 << 2)
+    static let Diagonal = GameOutcomeVal(rawValue: 1 << 3)
+    static let Row = GameOutcomeVal(rawValue: 1 << 4)
+    static let Column = GameOutcomeVal(rawValue: 1 << 5)
+    
+}
+
