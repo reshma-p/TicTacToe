@@ -16,21 +16,27 @@ class GameViewController: UIViewController {
     @IBOutlet weak var gameMessage: UILabel!
     
     //MARK: View Model
-    let viewModel: GameViewModel = GameViewModel()
+    let viewModel: GameViewModelType = GameViewModel()
     
     // MARK: Life cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
+        setupGameGrid()
+        gameMessage.text = ""
+    }
+    
+    // MARK: Private functions
+    private func setupGameGrid(){
         // Adding tapgesture to the grid
         // TODO: Should move to the GridView?
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         gridView.addGestureRecognizer(tapGesture)
         
-        gameMessage.text = ""
-        
+        gridView.setupGrid(rows: viewModel.rows, columns: viewModel.columns)
     }
     
+    // MARK: UI action handlers
     @objc func handleTap(sender: UITapGestureRecognizer) {
         if sender.state == .ended {
             let tappedLocation = sender.location(in: gridView)
@@ -54,9 +60,9 @@ class GameViewController: UIViewController {
                 return "We have encountered a problem, pls try again later."
         }
     }
-   
 }
 
+// MARK: GameViewModelDelegate Extension 
 extension GameViewController: GameViewModelDelegate {
     
     func updateGameCompletion(outCome: GameOutcome) {

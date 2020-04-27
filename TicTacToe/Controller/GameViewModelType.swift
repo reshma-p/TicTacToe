@@ -11,7 +11,10 @@ import Foundation
 protocol GameViewModelType: class {
     
     // MARK: Properties
-    
+    var rows: Int { get }
+    var columns: Int { get }
+    var squareSideLength: Int { get }
+    var delegate: GameViewModelDelegate? { get set}
     
     // MARK: Events
     func onGridTap(position: (row: Int, column: Int))

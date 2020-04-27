@@ -14,8 +14,8 @@ import UIKit
 class GameGrid: UIView {
     
     // MARK: Constant member variables
-    let numColumns = 3
-    let numRows = 3
+    var numColumns = 0
+    var numRows = 0
     let strokeColor = UIColor.orange
     let fillColor = UIColor.clear
     let symbolColor = UIColor.black
@@ -29,6 +29,9 @@ class GameGrid: UIView {
     
     /// Draws the grid for the game
     override func draw(_ rect: CGRect) {
+        guard numColumns > 0 && numRows > 0 else {
+            return
+        }
         createGrid(rect)
         
         for symbol in symbols {
@@ -40,6 +43,12 @@ class GameGrid: UIView {
     func refresh(with symbols: [Symbol]){
         self.symbols = symbols
         
+        setNeedsDisplay()
+    }
+    
+    func setupGrid(rows: Int, columns: Int){
+        numRows = rows
+        numColumns = columns
         setNeedsDisplay()
     }
     

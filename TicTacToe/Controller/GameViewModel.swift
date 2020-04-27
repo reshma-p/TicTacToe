@@ -10,15 +10,16 @@ import Foundation
 
 class GameViewModel: GameViewModelType {
     
+    
     // MARK: Private Member properties
     private let gameMatrix: GameMatrix = GameMatrix()
-    
-    
     private var gameState = GameState.New
     private var toggleX = true
     
     // MARK: Member properties
     weak var delegate: GameViewModelDelegate?
+    let rows: Int = 3
+    let columns: Int = 3
     let squareSideLength = 80
     
     
@@ -41,8 +42,6 @@ class GameViewModel: GameViewModelType {
        
         delegate?.updateGrid(withGameMatrix: gameMatrix)
         
-        nextMove()
-        
         // Check if any wins
         if(checkForWins(for: position)) {
             gameState = .Completed
@@ -50,6 +49,8 @@ class GameViewModel: GameViewModelType {
         } else if !gameMatrix.items.contains(.Empty) {
             gameState = .Completed
             delegate?.updateGameCompletion(outCome: .Draw)
+        } else {
+            nextMove()
         }
     }
     
