@@ -49,7 +49,7 @@ class GameViewController: UIViewController {
     
     func displayMessage(_ outCome: GameOutcome) -> String{
     
-        switch outCome {
+        switch outCome.winType {
             case .XWins:
                 return "X wins."
             case .OWins:

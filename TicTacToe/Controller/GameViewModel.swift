@@ -43,12 +43,13 @@ class GameViewModel: GameViewModelType {
         delegate?.updateGrid(withGameMatrix: gameMatrix)
         
         // Check if any wins
-        if(checkForWins(for: position)) {
+        if let winLocationType = checkForWins(for: position) {
             gameState = .Completed
-            delegate?.updateGameCompletion(outCome: GameOutcome.outcomeForSymbol(symbol: symbolValue))
+            let gameOutcome = GameOutcome(winType: WinType.outcomeForSymbol(symbol: symbolValue), winLocationType: winLocationType)
+            delegate?.updateGameCompletion(outCome: gameOutcome)
         } else if !gameMatrix.items.contains(.Empty) {
             gameState = .Completed
-            delegate?.updateGameCompletion(outCome: .Draw)
+            delegate?.updateGameCompletion(outCome: GameOutcome(winType: .Draw, winLocationType: nil))
         } else {
             nextMove()
         }
@@ -59,10 +60,20 @@ class GameViewModel: GameViewModelType {
         toggleX = !toggleX
     }
     
-    private func checkForWins(for position: Int) -> Bool{
+    private func checkForWins(for position: Int) -> WinLocationType? {
         let items = gameMatrix.items
         
-        return isRowWin(gameArray: items, for: position) || isColumnWin(gameArray: items, for: position) || isDiagonalWin(gameArray: items, for: position)
+        if isColumnWin(gameArray: items, for: position) {
+            let columnPosition: Int = gameMatrix.calculateColumnIndex(position)
+            return .Column(index: columnPosition)
+        } else if isRowWin(gameArray: items, for: position) {
+            let rowPosition: Int = gameMatrix.calculateRowIndex(position)
+            return .Row(index: rowPosition)
+        } else if isDiagonalWin(gameArray: items, for: position) {
+            return .Diagonal(type: .LtoR)
+        }
+        
+        return nil
     }
     
     private func isRowWin(gameArray : [SymbolValue], for position: Int) -> Bool{
@@ -124,20 +135,28 @@ class GameViewModel: GameViewModelType {
     }
 }
 
-
+// TODO: Move to another file
 enum GameState: String {
     case New
     case Completed
     case InProgress
 }
 
-enum GameOutcome: String {
+struct GameOutcome {
+    let winType: WinType
+    let winLocationType: WinLocationType?
+}
+
+enum WinType {
+    
     case XWins
     case OWins
     case Draw
     case Unknown
     
-    static func outcomeForSymbol(symbol: SymbolValue) -> GameOutcome{
+    
+    
+    static func outcomeForSymbol(symbol: SymbolValue) -> WinType{
         switch symbol {
             case .X:
                 return .XWins
@@ -147,18 +166,17 @@ enum GameOutcome: String {
                 return .Unknown
         }
     }
-}
-
-
-struct GameOutcomeVal: OptionSet{
-    let rawValue: Int
-
-    static let XWins = GameOutcomeVal(rawValue: 1 << 0)
-    static let OWins = GameOutcomeVal(rawValue: 1 << 1)
-    static let Draw = GameOutcomeVal(rawValue: 1 << 2)
-    static let Diagonal = GameOutcomeVal(rawValue: 1 << 3)
-    static let Row = GameOutcomeVal(rawValue: 1 << 4)
-    static let Column = GameOutcomeVal(rawValue: 1 << 5)
     
 }
 
+enum WinLocationType: Equatable {
+    case Row(index: Int)
+    case Column(index: Int)
+    case Diagonal(type: DiagonalStyle)
+    
+}
+
+enum DiagonalStyle: String{
+    case LtoR
+    case RtoL
+}
