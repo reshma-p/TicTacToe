@@ -27,6 +27,7 @@ class GameViewModel: GameViewModelType {
     func onGridTap(position: (row: Int, column: Int)) {
         
         guard gameState != .Completed else {
+            print("ooopsss!!! game already over. \(position.row) \(position.column)")
             return
         }
         
@@ -43,7 +44,7 @@ class GameViewModel: GameViewModelType {
         delegate?.updateGrid(withGameMatrix: gameMatrix)
         
         // Check if any wins
-        if let winLocationType = checkForWins(for: position) {
+        if let winLocationType = checkForWins(for: position, withSymbol: symbolValue) {
             gameState = .Completed
             let gameOutcome = GameOutcome(winType: WinType.outcomeForSymbol(symbol: symbolValue), winLocationType: winLocationType)
             delegate?.updateGameCompletion(outCome: gameOutcome)
@@ -60,8 +61,12 @@ class GameViewModel: GameViewModelType {
         toggleX = !toggleX
     }
     
-    private func checkForWins(for position: Int) -> WinLocationType? {
+    private func checkForWins(for position: Int, withSymbol symbol: SymbolValue) -> WinLocationType? {
         let items = gameMatrix.items
+        
+        guard gameMatrix.isPositionInRange(position) else {
+            return nil
+        }
         
         if isColumnWin(gameArray: items, for: position) {
             let columnPosition: Int = gameMatrix.calculateColumnIndex(position)
@@ -69,15 +74,19 @@ class GameViewModel: GameViewModelType {
         } else if isRowWin(gameArray: items, for: position) {
             let rowPosition: Int = gameMatrix.calculateRowIndex(position)
             return .Row(index: rowPosition)
-        } else if isDiagonalWin(gameArray: items, for: position) {
-            return .Diagonal(type: .LtoR)
+        } else if gameMatrix.isPositionOnDiagonal(position) {
+            if checkDiagonal(of: .LtoR, items,symbol) {
+                return .Diagonal(type: .LtoR)
+            } else if checkDiagonal(of: .RtoL, items,symbol) {
+                return .Diagonal(type: .RtoL)
+            }
         }
         
         return nil
     }
     
     private func isRowWin(gameArray : [SymbolValue], for position: Int) -> Bool{
-        guard gameMatrix.isPositionInRange(position) else {
+       guard gameMatrix.isPositionInRange(position) else {
            return false
        }
         
@@ -118,65 +127,33 @@ class GameViewModel: GameViewModelType {
         }
         let symbol = gameArray[position]
         
-        return checkDiagonal(index: 0, increment: (gameMatrix.size + 1), gameArray,symbol) || checkDiagonal(index: gameMatrix.size - 1, increment: (gameMatrix.size - 1), gameArray,symbol)
+        return checkDiagonal(of: .LtoR, gameArray,symbol) || checkDiagonal(of: .RtoL, gameArray,symbol)
     }
     
-    private func checkDiagonal(index: Int, increment: Int, _ gameArray: [SymbolValue], _ symbol: SymbolValue) -> Bool{
-
-        var index = index
-        for _ in 1...gameMatrix.size {
-            let symbolIndex = index
-            if(symbol != gameArray[symbolIndex]) {
-                return false
+    
+    func checkDiagonal(of type: DiagonalStyle, _ gameArray: [SymbolValue], _ symbol: SymbolValue) -> Bool {
+        print("===> checkDiagonal : for type \(type)")
+        let fromIndex = type == DiagonalStyle.LtoR ? 0 : gameMatrix.size - 1   // 0 : 2
+        let increment = type == DiagonalStyle.LtoR ? gameMatrix.size + 1 : gameMatrix.size - 1  // 4 : 2
+        
+        var matchedSymbols = 0
+        
+        print("===> checkDiagonal : with range: \(fromIndex) to \(gameArray.count) with stride \(increment)")
+        for symbolIndex in stride(from: fromIndex, to: gameArray.count, by: increment) {
+            print("===> checkDiagonal : Symbol position \(symbolIndex) ")
+            
+            if(symbol == gameArray[symbolIndex]) {
+                matchedSymbols += 1
             }
-            index = index + increment
         }
-        return true
+        print("===> matchedSymbols : for type \(matchedSymbols)")
+        return matchedSymbols == gameMatrix.size
     }
 }
 
-// TODO: Move to another file
 enum GameState: String {
     case New
     case Completed
     case InProgress
 }
 
-struct GameOutcome {
-    let winType: WinType
-    let winLocationType: WinLocationType?
-}
-
-enum WinType {
-    
-    case XWins
-    case OWins
-    case Draw
-    case Unknown
-    
-    
-    
-    static func outcomeForSymbol(symbol: SymbolValue) -> WinType{
-        switch symbol {
-            case .X:
-                return .XWins
-            case .O:
-                return .OWins
-            default :
-                return .Unknown
-        }
-    }
-    
-}
-
-enum WinLocationType: Equatable {
-    case Row(index: Int)
-    case Column(index: Int)
-    case Diagonal(type: DiagonalStyle)
-    
-}
-
-enum DiagonalStyle: String{
-    case LtoR
-    case RtoL
-}

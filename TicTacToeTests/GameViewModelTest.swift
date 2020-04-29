@@ -217,7 +217,7 @@ class GameViewModelTest: XCTestCase {
                                                     SymbolValue.Empty,SymbolValue.X,SymbolValue.Empty,
                                                     SymbolValue.X,SymbolValue.O,SymbolValue.Empty], "Item not added to right position")
         
-        XCTAssertNotNil(delegate.gameOutcome,"Should be nil.")
+        XCTAssertNotNil(delegate.gameOutcome,"Should not be nil.")
         XCTAssertEqual(delegate.gameOutcome?.winType, WinType.XWins,"Its X win")
         XCTAssertNotNil(delegate.gameOutcome?.winLocationType,"Its a diagonal win from Left to Right")
         XCTAssertEqual(delegate.gameOutcome?.winLocationType,WinLocationType.Diagonal(type: .RtoL),"Its a diagonal win from Right to Left")

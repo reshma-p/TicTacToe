@@ -28,6 +28,8 @@
 		4EB6C3F023D8FA9600A80A66 /* GameGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB6C3EF23D8FA9600A80A66 /* GameGrid.swift */; };
 		4EB6C3F123D8FA9600A80A66 /* GameGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB6C3EF23D8FA9600A80A66 /* GameGrid.swift */; };
 		4EB9781F238C9A7D00F79057 /* GameMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E507307238C996100FD4FF6 /* GameMatrix.swift */; };
+		9ACAAC92245A1D8000F516F0 /* GameOutcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACAAC91245A1D8000F516F0 /* GameOutcome.swift */; };
+		9ACAAC93245A1D8500F516F0 /* GameOutcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACAAC91245A1D8000F516F0 /* GameOutcome.swift */; };
 		9AE589112450FD6800CAC91B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 9AE589102450FD6800CAC91B /* README.md */; };
 		9AE5891424523F0600CAC91B /* GameViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE5891324523F0600CAC91B /* GameViewModelTest.swift */; };
 /* End PBXBuildFile section */
@@ -63,6 +65,7 @@
 		4E7398C62387530A00089EA9 /* GamePlayTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlayTest.swift; sourceTree = "<group>"; };
 		4EB5E9622348171C00B723B2 /* ToDo-list.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = "ToDo-list.rtf"; sourceTree = "<group>"; };
 		4EB6C3EF23D8FA9600A80A66 /* GameGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GameGrid.swift; path = TicTacToe/View/GameGrid.swift; sourceTree = SOURCE_ROOT; };
+		9ACAAC91245A1D8000F516F0 /* GameOutcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOutcome.swift; sourceTree = "<group>"; };
 		9AE589102450FD6800CAC91B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		9AE589122451013E00CAC91B /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9AE5891324523F0600CAC91B /* GameViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModelTest.swift; sourceTree = "<group>"; };
@@ -89,6 +92,7 @@
 		4E480A4B2348081900FFFB0A = {
 			isa = PBXGroup;
 			children = (
+				9ACAAC91245A1D8000F516F0 /* GameOutcome.swift */,
 				9AE589122451013E00CAC91B /* MyPlayground.playground */,
 				9AE589102450FD6800CAC91B /* README.md */,
 				4EB5E9622348171C00B723B2 /* ToDo-list.rtf */,
@@ -259,6 +263,7 @@
 				4E70AC9923E38DA0002D4217 /* GameViewModel.swift in Sources */,
 				4E507308238C996100FD4FF6 /* GameMatrix.swift in Sources */,
 				4E480A582348081900FFFB0A /* AppDelegate.swift in Sources */,
+				9ACAAC92245A1D8000F516F0 /* GameOutcome.swift in Sources */,
 				4E480A6F23480DA400FFFB0A /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -269,6 +274,7 @@
 			files = (
 				9AE5891424523F0600CAC91B /* GameViewModelTest.swift in Sources */,
 				4E70AC9D23E38DBF002D4217 /* GameViewModelType.swift in Sources */,
+				9ACAAC93245A1D8500F516F0 /* GameOutcome.swift in Sources */,
 				4E70AC9A23E38DA0002D4217 /* GameViewModel.swift in Sources */,
 				4E7398BF238752F800089EA9 /* TicTacToeTests.swift in Sources */,
 				4E7398C72387530A00089EA9 /* GamePlayTest.swift in Sources */,

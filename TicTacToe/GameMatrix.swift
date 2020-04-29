@@ -58,4 +58,4 @@ enum SymbolValue:String{
        case X
        case O
        case Empty = ""
-   }
+}
