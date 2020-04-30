@@ -19,12 +19,14 @@ class GameGrid: UIView {
     let strokeColor = UIColor.orange
     let fillColor = UIColor.clear
     let symbolColor = UIColor.black
+    let winLineColor = UIColor.black
     
     let lineWidth = CGFloat(2)
     
     // MARK: Member variables
 //    var isSymbolDrawPending = false
     var symbols: [Symbol] = []
+    var winLocation: WinLocationType?
     
     
     /// Draws the grid for the game
@@ -37,12 +39,20 @@ class GameGrid: UIView {
         for symbol in symbols {
             add(symbol: symbol.value, in: symbol.rect)
         }
+        
+        if let winLocation = self.winLocation {
+            drawWinLine(rect: rect, winLocation)
+        }
     }
 
     /// Called by the controller of this view to update it.
     func refresh(with symbols: [Symbol]){
         self.symbols = symbols
-        
+        setNeedsDisplay()
+    }
+    
+    func updateGameOutcome(winLocation: WinLocationType?){
+        self.winLocation = winLocation
         setNeedsDisplay()
     }
     
@@ -100,6 +110,38 @@ class GameGrid: UIView {
         let attributedString = NSAttributedString(string: symbol, attributes: attributes)
         attributedString.draw(in: rect)
     }
+    
+    private func drawWinLine(rect: CGRect, _ winLocation: WinLocationType) {
+        let bezierPath = UIBezierPath()
+        winLineColor.setStroke()
+        bezierPath.lineWidth = lineWidth + 2
+        let cellSize = rect.width / CGFloat(numColumns)
+        
+        switch winLocation {
+            case .Diagonal(let style) :
+                if style == .LtoR {
+                    let from = CGPoint(x: rect.origin.x, y: rect.origin.y)
+                    let to = CGPoint(x: rect.origin.x + rect.width, y: rect.origin.y + rect.height)
+                    drawLine(using: bezierPath, from: from, to: to)
+                } else if style == .RtoL {
+                    let from = CGPoint(x: rect.origin.x + rect.width, y: rect.origin.y)
+                    let to = CGPoint(x: rect.origin.x, y: rect.origin.y + rect.height)
+                    drawLine(using: bezierPath, from: from, to: to)
+                }
+            case .Row(let index) :
+                let y = CGFloat(index) * cellSize + cellSize/2
+                let from = CGPoint(x: rect.origin.x, y: y)
+                let to = CGPoint(x: rect.origin.x + rect.width, y: y)
+                drawLine(using: bezierPath, from: from, to: to)
+            case .Column(let index) :
+                let x = CGFloat(index) * cellSize + cellSize/2
+                let from = CGPoint(x: x, y: rect.origin.y)
+                let to = CGPoint(x: x, y: rect.origin.y + rect.height)
+                drawLine(using: bezierPath, from: from, to: to)
+            }
+        
+        bezierPath.stroke()
+    }
 }
 
 
@@ -107,5 +149,4 @@ struct Symbol{
     var value: String
     var rect: CGRect
 }
-
 

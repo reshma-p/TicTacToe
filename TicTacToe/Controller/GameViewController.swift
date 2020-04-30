@@ -66,6 +66,7 @@ class GameViewController: UIViewController {
 extension GameViewController: GameViewModelDelegate {
     
     func updateGameCompletion(outCome: GameOutcome) {
+        gridView.updateGameOutcome(winLocation: outCome.winLocationType)
         gameMessage.text = "\(displayMessage(outCome)) "
         gridView.isUserInteractionEnabled = false
     }
