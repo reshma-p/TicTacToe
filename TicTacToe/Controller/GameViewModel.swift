@@ -75,9 +75,9 @@ class GameViewModel: GameViewModelType {
             let rowPosition: Int = gameMatrix.calculateRowIndex(position)
             return .Row(index: rowPosition)
         } else if gameMatrix.isPositionOnDiagonal(position) {
-            if checkDiagonal(of: .LtoR, items,symbol) {
+            if checkDiagonal(of: .LtoR,items,symbol) {
                 return .Diagonal(type: .LtoR)
-            } else if checkDiagonal(of: .RtoL, items,symbol) {
+            } else if checkDiagonal(of: .RtoL,items,symbol) {
                 return .Diagonal(type: .RtoL)
             }
         }
@@ -121,25 +121,17 @@ class GameViewModel: GameViewModelType {
         return true
     }
     
-    private func isDiagonalWin(gameArray : [SymbolValue], for position: Int) -> Bool{
-        guard gameMatrix.isPositionInRange(position) && gameMatrix.isPositionOnDiagonal(position) else {
-            return false
-        }
-        let symbol = gameArray[position]
-        
-        return checkDiagonal(of: .LtoR, gameArray,symbol) || checkDiagonal(of: .RtoL, gameArray,symbol)
-    }
-    
     
     func checkDiagonal(of type: DiagonalStyle, _ gameArray: [SymbolValue], _ symbol: SymbolValue) -> Bool {
         print("===> checkDiagonal : for type \(type)")
         let fromIndex = type == DiagonalStyle.LtoR ? 0 : gameMatrix.size - 1   // 0 : 2
         let increment = type == DiagonalStyle.LtoR ? gameMatrix.size + 1 : gameMatrix.size - 1  // 4 : 2
+        let toIndex = type == DiagonalStyle.LtoR ? gameArray.count : gameArray.count - (gameMatrix.size - 1)  // 8 : 7
         
         var matchedSymbols = 0
         
-        print("===> checkDiagonal : with range: \(fromIndex) to \(gameArray.count) with stride \(increment)")
-        for symbolIndex in stride(from: fromIndex, to: gameArray.count, by: increment) {
+        print("===> checkDiagonal : with range: \(fromIndex) to \(toIndex) with stride \(increment)")
+        for symbolIndex in stride(from: fromIndex, to: toIndex, by: increment) {
             print("===> checkDiagonal : Symbol position \(symbolIndex) ")
             
             if(symbol == gameArray[symbolIndex]) {
@@ -149,6 +141,51 @@ class GameViewModel: GameViewModelType {
         print("===> matchedSymbols : for type \(matchedSymbols)")
         return matchedSymbols == gameMatrix.size
     }
+    
+    
+//    private func isDiagonalWin(gameArray : [SymbolValue], for position: Int) -> Bool{
+//        guard gameMatrix.isPositionInRange(position) && gameMatrix.isPositionOnDiagonal(position) else {
+//            return false
+//        }
+//        let symbol = gameArray[position]
+//
+//        return checkLtoRDiagonal(gameArray,symbol) || checkRtoLDiagonal(gameArray,symbol)
+//    }
+    
+//    func checkLtoRDiagonal(_ gameArray: [SymbolValue], _ symbol: SymbolValue) -> Bool{
+//
+//           // row == column , starts from 0 and goes to size - 1
+//
+//           for rowCol in 0...gameMatrix.size-1 {
+//
+//               let index = rowCol * gameMatrix.size + rowCol
+//
+//               if gameArray[index] != symbol {
+//                   return false
+//               }
+//           }
+//
+//           return true
+//       }
+//
+//
+//       func checkRtoLDiagonal(_ gameArray: [SymbolValue], _ symbol: SymbolValue) -> Bool{
+//
+//           // row == column , starts from 0 and goes to size - 1
+//
+//           for row in 0...gameMatrix.size-1 {
+//               let column = gameMatrix.size - 1 - row
+//
+//               let index = row * gameMatrix.size + column
+//
+//               if gameArray[index] != symbol {
+//                   return false
+//               }
+//           }
+//
+//
+//           return true
+//       }
 }
 
 enum GameState: String {

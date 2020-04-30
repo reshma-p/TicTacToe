@@ -222,6 +222,41 @@ class GameViewModelTest: XCTestCase {
         XCTAssertNotNil(delegate.gameOutcome?.winLocationType,"Its a diagonal win from Left to Right")
         XCTAssertEqual(delegate.gameOutcome?.winLocationType,WinLocationType.Diagonal(type: .RtoL),"Its a diagonal win from Right to Left")
     }
+    
+    
+    /**
+       Diagonal RtoL win test for X
+    
+           | X |   | X |
+           |   | O |   |
+           | O | X | O |
+    */
+
+    func testGridTapWithDiagonalNoWin(){
+        // Given
+        let viewModel = GameViewModel()
+        let delegate = MockGameDisplayDelegate()
+        viewModel.delegate = delegate
+        
+        // When
+        viewModel.onGridTap(position: (0,0))
+        viewModel.onGridTap(position: (1,1))
+        viewModel.onGridTap(position: (0,2))
+        viewModel.onGridTap(position: (2,0))
+        viewModel.onGridTap(position: (2,1))
+        viewModel.onGridTap(position: (2,2))
+        
+        // Then
+        XCTAssertNotNil(delegate.gameMatrix,"Should not be nil.")
+        XCTAssertEqual(delegate.gameMatrix?.items, [SymbolValue.X,SymbolValue.Empty,SymbolValue.X,
+                                                    SymbolValue.Empty,SymbolValue.O,SymbolValue.Empty,
+                                                    SymbolValue.O,SymbolValue.X,SymbolValue.O], "Item not added to right position")
+        
+        XCTAssertNil(delegate.gameOutcome,"Should be nil.")
+//        XCTAssertEqual(delegate.gameOutcome?.winType, WinType.XWins,"Its X win")
+//        XCTAssertNotNil(delegate.gameOutcome?.winLocationType,"Its a diagonal win from Left to Right")
+//        XCTAssertEqual(delegate.gameOutcome?.winLocationType,WinLocationType.Diagonal(type: .RtoL),"Its a diagonal win from Right to Left")
+    }
 }
 
 
