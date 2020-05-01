@@ -10,13 +10,20 @@
 import UIKit
 
 class GameViewController: UIViewController {
+    //MARK: View Model
+    let viewModel: GameViewModelType = GameViewModel()
+    
 
     //MARK: UI Outlets
     @IBOutlet weak var gridView: GameGrid!
     @IBOutlet weak var gameMessage: UILabel!
+    @IBOutlet weak var newGameButton: UIButton!
     
-    //MARK: View Model
-    let viewModel: GameViewModelType = GameViewModel()
+    // MARK: UI Actions
+    @IBAction func tappedNewGame(_ sender: UIButton) {
+        viewModel.onNewGame()
+    }
+    
     
     // MARK: Life cycle methods
     override func viewDidLoad() {
@@ -24,6 +31,7 @@ class GameViewController: UIViewController {
         viewModel.delegate = self
         setupGameGrid()
         gameMessage.text = ""
+        newGameButton.isHidden = true
     }
     
     // MARK: Private functions
@@ -33,7 +41,7 @@ class GameViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         gridView.addGestureRecognizer(tapGesture)
         
-        gridView.setupGrid(rows: viewModel.rows, columns: viewModel.columns)
+        gridView.setup(rows: viewModel.rows, columns: viewModel.columns)
     }
     
     // MARK: UI action handlers
@@ -51,14 +59,22 @@ class GameViewController: UIViewController {
     
         switch outCome.winType {
             case .XWins:
-                return "X wins."
+                return "X wins"
             case .OWins:
-                return "O wins."
+                return "O wins"
             case .Draw:
-                return "It's a draw."
+                return "It's a draw!"
         case .Unknown:
                 return "We have encountered a problem, pls try again later."
         }
+    }
+    
+    
+    func reset() {
+        gameMessage.text = ""
+        newGameButton.isHidden = true
+        gridView.reset()
+        gridView.isUserInteractionEnabled = true
     }
 }
 
@@ -69,6 +85,7 @@ extension GameViewController: GameViewModelDelegate {
         gridView.updateGameOutcome(winLocation: outCome.winLocationType)
         gameMessage.text = "\(displayMessage(outCome)) "
         gridView.isUserInteractionEnabled = false
+        newGameButton.isHidden = false
     }
     
     func updateGrid(withGameMatrix: GameMatrix) {
@@ -81,4 +98,10 @@ extension GameViewController: GameViewModelDelegate {
         
         gridView.refresh(with: symbolsToDraw)
     }
+    
+    func resetGame() {
+        reset()
+        gridView.setup(rows: viewModel.rows, columns: viewModel.columns)
+    }
+    
 }

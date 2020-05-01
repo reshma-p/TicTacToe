@@ -11,8 +11,10 @@ import Foundation
 class GameViewModel: GameViewModelType {
     
     
+    
+    
     // MARK: Private Member properties
-    private let gameMatrix: GameMatrix = GameMatrix()
+    private var gameMatrix: GameMatrix = GameMatrix()
     private var gameState = GameState.New
     private var toggleX = true
     
@@ -54,6 +56,18 @@ class GameViewModel: GameViewModelType {
         } else {
             nextMove()
         }
+    }
+    
+    
+    func onNewGame() {
+        resetGame()
+        delegate?.resetGame()
+    }
+    
+    private func resetGame(){
+        gameMatrix = GameMatrix()
+        gameState = GameState.New
+        toggleX = true
     }
     
     // MARK: Private member functions
@@ -141,51 +155,6 @@ class GameViewModel: GameViewModelType {
         print("===> matchedSymbols : for type \(matchedSymbols)")
         return matchedSymbols == gameMatrix.size
     }
-    
-    
-//    private func isDiagonalWin(gameArray : [SymbolValue], for position: Int) -> Bool{
-//        guard gameMatrix.isPositionInRange(position) && gameMatrix.isPositionOnDiagonal(position) else {
-//            return false
-//        }
-//        let symbol = gameArray[position]
-//
-//        return checkLtoRDiagonal(gameArray,symbol) || checkRtoLDiagonal(gameArray,symbol)
-//    }
-    
-//    func checkLtoRDiagonal(_ gameArray: [SymbolValue], _ symbol: SymbolValue) -> Bool{
-//
-//           // row == column , starts from 0 and goes to size - 1
-//
-//           for rowCol in 0...gameMatrix.size-1 {
-//
-//               let index = rowCol * gameMatrix.size + rowCol
-//
-//               if gameArray[index] != symbol {
-//                   return false
-//               }
-//           }
-//
-//           return true
-//       }
-//
-//
-//       func checkRtoLDiagonal(_ gameArray: [SymbolValue], _ symbol: SymbolValue) -> Bool{
-//
-//           // row == column , starts from 0 and goes to size - 1
-//
-//           for row in 0...gameMatrix.size-1 {
-//               let column = gameMatrix.size - 1 - row
-//
-//               let index = row * gameMatrix.size + column
-//
-//               if gameArray[index] != symbol {
-//                   return false
-//               }
-//           }
-//
-//
-//           return true
-//       }
 }
 
 enum GameState: String {

@@ -18,12 +18,14 @@ protocol GameViewModelType: class {
     
     // MARK: Events
     func onGridTap(position: (row: Int, column: Int))
+    func onNewGame()
 }
 
 
 protocol GameViewModelDelegate: class {
     
     // MARK: Events
+    func resetGame()
     func updateGrid(withGameMatrix : GameMatrix)
     
     func updateGameCompletion(outCome: GameOutcome)

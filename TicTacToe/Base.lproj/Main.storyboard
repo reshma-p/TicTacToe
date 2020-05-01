@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WFH-af-yAs">
-    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <device id="ipad10_5" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -13,17 +13,17 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="TicTacToe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cWr-WI-f5l">
-                                <rect key="frame" x="109.66666666666669" y="413" width="156" height="40"/>
+                                <rect key="frame" x="339" y="561" width="156" height="40"/>
                                 <color key="backgroundColor" red="0.97584134340286255" green="0.2459321916103363" blue="0.0078102974221110344" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="156" id="C6P-gd-C4U"/>
                                     <constraint firstAttribute="height" constant="40" id="RAf-nW-tC6"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="29"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
                                 <state key="normal" title="Start">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -63,20 +63,38 @@
                                     <constraint firstAttribute="height" constant="240" id="Ffj-YM-hde"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Game message" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y7k-uz-opa">
-                                <rect key="frame" x="116.66666666666667" y="158" width="141.66666666666663" height="49"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game message" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y7k-uz-opa">
+                                <rect key="frame" x="116.66666666666667" y="158" width="141.66666666666663" height="25.333333333333343"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <color key="textColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NAm-cj-nRD">
+                                <rect key="frame" x="109.66666666666669" y="579" width="156" height="40"/>
+                                <color key="backgroundColor" red="1" green="0.14212516350000001" blue="0.047566834830000002" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="156" id="5eP-Xx-qCx"/>
+                                    <constraint firstAttribute="height" constant="40" id="sHd-wy-wQH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <state key="normal" title="New Game">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="tappedNewGame:" destination="Pt4-NG-mYI" eventType="touchUpInside" id="a7T-Po-5s8"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="iQX-3w-7vB" firstAttribute="top" relation="greaterThanOrEqual" secondItem="y7k-uz-opa" secondAttribute="bottom" constant="40" id="2kz-6c-NPi"/>
+                            <constraint firstItem="NAm-cj-nRD" firstAttribute="centerX" secondItem="6LX-S9-VSF" secondAttribute="centerX" id="CT4-ea-mBY"/>
+                            <constraint firstItem="y7k-uz-opa" firstAttribute="top" secondItem="6LX-S9-VSF" secondAttribute="top" constant="70" id="M4A-wV-2bz"/>
                             <constraint firstItem="y7k-uz-opa" firstAttribute="centerX" secondItem="6LX-S9-VSF" secondAttribute="centerX" id="gh0-9i-uVg"/>
                             <constraint firstItem="iQX-3w-7vB" firstAttribute="centerX" secondItem="6LX-S9-VSF" secondAttribute="centerX" id="l7g-Db-nsp"/>
                             <constraint firstItem="iQX-3w-7vB" firstAttribute="centerY" secondItem="6LX-S9-VSF" secondAttribute="centerY" id="yRS-l0-yIy"/>
+                            <constraint firstItem="NAm-cj-nRD" firstAttribute="top" secondItem="iQX-3w-7vB" secondAttribute="bottom" constant="26" id="zeX-4d-Pf3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6LX-S9-VSF"/>
                     </view>
@@ -84,6 +102,7 @@
                     <connections>
                         <outlet property="gameMessage" destination="y7k-uz-opa" id="gSz-kh-831"/>
                         <outlet property="gridView" destination="iQX-3w-7vB" id="tCh-a6-txC"/>
+                        <outlet property="newGameButton" destination="NAm-cj-nRD" id="5x2-eR-Lr4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AmU-4X-8Bl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -96,7 +115,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="WFH-af-yAs" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zrT-2i-cSl">
-                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

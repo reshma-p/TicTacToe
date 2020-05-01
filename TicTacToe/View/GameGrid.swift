@@ -16,6 +16,8 @@ class GameGrid: UIView {
     // MARK: Constant member variables
     var numColumns = 0
     var numRows = 0
+    
+    // TODO: color scheme should come in the setup. 
     let strokeColor = UIColor.orange
     let fillColor = UIColor.clear
     let symbolColor = UIColor.black
@@ -56,10 +58,18 @@ class GameGrid: UIView {
         setNeedsDisplay()
     }
     
-    func setupGrid(rows: Int, columns: Int){
+    func setup(rows: Int, columns: Int){
         numRows = rows
         numColumns = columns
+        
         setNeedsDisplay()
+    }
+    
+    func reset(){
+        numRows = 0
+        numColumns = 0
+        winLocation = nil
+        symbols = []
     }
     
     // MAKR: Utilities for drawing the various aspects of the grid
